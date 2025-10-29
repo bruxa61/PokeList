@@ -20,7 +20,7 @@ const collections = {
   }
 };
 
-let currentCollection = 'rivals';
+let currentCollection = 'journey';
 let currentFilter = 'all';
 let currentTypeFilter = 'all';
 let currentRarityFilter = 'all';
@@ -196,7 +196,7 @@ function renderTypeFilters() {
     btn.dataset.type = key;
     btn.style.setProperty('--type-color', type.color);
     btn.innerHTML = `
-      <span class="type-icon">${type.symbol}</span>
+      <svg class="type-icon" width="24" height="24" viewBox="0 0 24 24">${type.svg}</svg>
       <span class="type-name">${type.name}</span>
     `;
     typeFiltersContainer.appendChild(btn);
@@ -294,7 +294,8 @@ function createCardElement(cardInfo, isCollected, collection) {
       <p class="card-name">${cardInfo.name}</p>
       <div class="card-meta">
         <span class="card-type" style="color: ${pokemonType.color}">
-          ${pokemonType.symbol} ${pokemonType.name}
+          <svg class="card-type-icon" width="16" height="16" viewBox="0 0 24 24">${pokemonType.svg}</svg>
+          ${pokemonType.name}
         </span>
         <span class="card-number">#${displayNum}</span>
       </div>

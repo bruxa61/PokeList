@@ -357,18 +357,10 @@ body {
 }
 
 .type-icon {
-  font-size: 1.2rem;
-}
-
-.type-icon-img {
   width: 24px;
   height: 24px;
-  object-fit: contain;
-  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2));
-}
-
-.type-icon-fallback {
-  font-size: 1.2rem;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .type-name {
@@ -541,14 +533,10 @@ body {
 }
 
 .card-type-icon {
-  width: 18px;
-  height: 18px;
-  object-fit: contain;
-  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
-}
-
-.card-type-fallback {
-  font-size: 0.9rem;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .card-number {
