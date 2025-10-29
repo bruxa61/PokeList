@@ -1,19 +1,32 @@
+// Configuração das coleções
 const collections = {
   journey: {
     name: 'Amigos de Jornada',
     code: 'SV09',
     theme: 'journey',
-    totalCards: 190,
-    imageUrlPattern: (num) => `https://dz3we2x72f7ol.cloudfront.net/expansions/journey-together/pt-br/SV09_PTBR_${num}.png`,
-    cardNumbers: generateCardNumbers(1, 190)
+    totalCards: 159,
+    imageUrlPattern: (num) => {
+      // SV09 ainda não está no CDN pokemontcg.io, usando placeholder
+      return `https://tcg.pokemon.com/assets/img/global/tcg-card-back.jpg`;
+    },
+    cardNumbers: generateCardNumbers(1, 159)
   },
   silver: {
     name: 'Tempestade de Prata',
     code: 'SWSH12',
     theme: 'silver',
-    totalCards: 215,
-    imageUrlPattern: (num) => `https://images.pokemontcg.io/swsh12/${num}.png`,
-    cardNumbers: generateCardNumbers(1, 215)
+    totalCards: 245,
+    imageUrlPattern: (num) => {
+      if (typeof num === 'string' && num.startsWith('TG')) {
+        return `https://images.pokemontcg.io/swsh12/${num}.png`;
+      }
+      return `https://images.pokemontcg.io/swsh12/${num}.png`;
+    },
+    cardNumbers: [
+      ...generateCardNumbers(1, 195),
+      ...generateCardNumbers(196, 215),
+      ...generateTrainerGalleryNumbers()
+    ]
   }
 };
 
@@ -25,7 +38,15 @@ function generateCardNumbers(start, end) {
   return numbers;
 }
 
-let currentCollection = 'journey';
+function generateTrainerGalleryNumbers() {
+  const tgCards = [];
+  for (let i = 1; i <= 30; i++) {
+    tgCards.push(`TG${String(i).padStart(2, '0')}`);
+  }
+  return tgCards;
+}
+
+let currentCollection = 'silver'; // Começar com Silver que tem imagens
 let currentFilter = 'all';
 let collectedCards = {};
 
@@ -149,21 +170,29 @@ function createCardElement(cardNum, isCollected, collection) {
   card.className = `card-item ${isCollected ? 'collected' : 'not-collected'}`;
   card.dataset.cardNum = cardNum;
   
-  const paddedNum = String(cardNum).padStart(3, '0');
-  const imageUrl = collection.imageUrlPattern(paddedNum);
+  let displayNum, imageNum;
+  if (typeof cardNum === 'string') {
+    displayNum = cardNum;
+    imageNum = cardNum;
+  } else {
+    displayNum = String(cardNum).padStart(3, '0');
+    imageNum = cardNum;
+  }
+  
+  const imageUrl = collection.imageUrlPattern(imageNum);
   
   card.innerHTML = `
     <div class="card-image-container">
       <img 
         class="card-image" 
         src="${imageUrl}" 
-        alt="Carta ${paddedNum}"
+        alt="Carta ${displayNum}"
         loading="lazy"
         onerror="this.src='https://tcg.pokemon.com/assets/img/global/tcg-card-back.jpg'"
       >
     </div>
     <div class="card-info">
-      <p class="card-number">#${paddedNum}</p>
+      <p class="card-number">#${displayNum}</p>
     </div>
   `;
   
@@ -187,11 +216,20 @@ function updateProgress() {
 
 function openModal(cardNum, isCollected, collection) {
   const modal = document.getElementById('card-modal');
-  const paddedNum = String(cardNum).padStart(3, '0');
-  const imageUrl = collection.imageUrlPattern(paddedNum);
+  
+  let displayNum, imageNum;
+  if (typeof cardNum === 'string') {
+    displayNum = cardNum;
+    imageNum = cardNum;
+  } else {
+    displayNum = String(cardNum).padStart(3, '0');
+    imageNum = cardNum;
+  }
+  
+  const imageUrl = collection.imageUrlPattern(imageNum);
   
   document.getElementById('modal-image').src = imageUrl;
-  document.getElementById('modal-name').textContent = `Carta #${paddedNum}`;
+  document.getElementById('modal-name').textContent = `Carta #${displayNum}`;
   document.getElementById('modal-number').textContent = `${collection.name} - ${collection.code}`;
   
   const toggleBtn = document.getElementById('modal-toggle');

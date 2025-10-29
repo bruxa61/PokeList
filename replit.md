@@ -1,74 +1,105 @@
 # Checklist Pokémon TCG
 
 ## Visão Geral
-Aplicação web para acompanhar sua coleção de cartas Pokémon TCG. Marque cartas como coletadas, acompanhe seu progresso e organize sua coleção com um design moderno inspirado no site oficial da Pokémon.
+Aplicação web moderna para acompanhar sua coleção de cartas Pokémon TCG. Design inspirado no site oficial da Pokémon com interface intuitiva e elegante.
 
 ## Stack Tecnológico
 - **Frontend**: HTML5, CSS3, JavaScript (Vanilla)
 - **Armazenamento**: localStorage (sem banco de dados)
-- **Servidor**: Python HTTP server para desenvolvimento
-- **Imagens**: CDN oficial da Pokémon
+- **Servidor**: Python HTTP server
+- **Imagens**: Pokémon TCG API (images.pokemontcg.io)
 
 ## Estrutura do Projeto
 ```
 /
 ├── index.html        # Página principal
 ├── css/
-│   └── style.css    # Estilos customizados e responsivos
+│   └── style.css    # Estilos modernos e responsivos
 ├── js/
-│   └── main.js      # Lógica da aplicação e localStorage
-└── server.py        # Servidor HTTP para desenvolvimento
+│   └── main.js      # Lógica da aplicação
+└── server.py        # Servidor HTTP de desenvolvimento
 ```
 
 ## Funcionalidades
 
 ### Coleções Disponíveis
-1. **Amigos de Jornada (SV09)** - 190 cartas
-2. **Tempestade de Prata (SWSH12)** - 215 cartas
 
-### Recursos
-- ✅ Marcação de cartas coletadas com um clique
-- 📊 Acompanhamento de progresso em tempo real
-- 🎨 Temas visuais distintos para cada coleção
-- 🔍 Filtros: Ver todas / Coletadas / Faltando
-- 💾 Salvamento automático via localStorage
-- 📱 Design responsivo para mobile e desktop
-- 🖼️ Modal com visualização ampliada das cartas
-- 🗑️ Opção de limpar toda a coleção
+#### 1. **Tempestade de Prata (SWSH12)** - 245 cartas ✅
+- Cartas principais: 1-195
+- Cartas secretas: 196-215
+- Trainer Gallery: TG01-TG30
+- **Todas as imagens funcionando perfeitamente!**
 
-### Design
-- Interface inspirada no site oficial da Pokémon TCG
-- Cartas não coletadas aparecem em escala de cinza
-- Cartas coletadas com check verde e cores vibrantes
-- Barra de progresso animada
-- Efeitos de hover e transições suaves
+#### 2. **Amigos de Jornada (SV09)** - 159 cartas ⏳
+- Coleção muito recente (lançada em março de 2025)
+- Imagens ainda não disponíveis no CDN público
+- Será atualizada assim que as imagens estiverem disponíveis
 
-## Como Funciona
+### Recursos Principais
+- ✅ **Clique para Coletar**: Marque cartas com um simples clique
+- 📊 **Progresso em Tempo Real**: Veja quantas cartas você já tem
+- 🎨 **Temas Personalizados**: Cada coleção com suas próprias cores
+- 🔍 **Filtros Inteligentes**:
+  - Ver Todas
+  - Somente Coletadas
+  - Somente Faltando
+- 💾 **Salvamento Automático**: Dados persistem no navegador
+- 📱 **100% Responsivo**: Funciona em mobile, tablet e desktop
+- 🖼️ **Modal de Visualização**: Veja cartas em tamanho grande
+- 🗑️ **Reset por Coleção**: Limpe sua coleção quando quiser
 
-### Armazenamento
+### Interface Visual
+- **Cartas não coletadas**: Aparecem em escala de cinza com opacidade reduzida
+- **Cartas coletadas**: Cores vibrantes com check verde ✓
+- **Efeitos suaves**: Transições e animações em todos os elementos
+- **Barra de progresso**: Animada com cores da coleção
+
+## Como Usar
+
+1. **Selecionar Coleção**: Clique no botão da coleção desejada
+2. **Marcar Cartas**: Clique em qualquer carta para marcá-la como coletada
+3. **Filtrar**: Use os botões de filtro para organizar sua visualização
+4. **Visualizar**: Clique em uma carta para ver em tamanho grande
+
+## Armazenamento de Dados
+
 Os dados são salvos localmente no navegador usando localStorage:
 ```javascript
 {
-  "journey": [1, 5, 10, 23, ...],  // IDs das cartas coletadas
+  "journey": [1, 5, 10, ...],  // Números das cartas coletadas
   "silver": [2, 8, 15, ...]
 }
 ```
 
-### Estrutura das Cartas
-Cada coleção define:
-- Nome e código da coleção
-- Total de cartas
-- Padrão de URL das imagens
-- Tema de cores
+**Observação**: Os dados ficam salvos apenas no navegador que você está usando. Se limpar os dados do navegador, sua coleção será perdida.
 
 ## Desenvolvimento
-Execute `python3 server.py` para iniciar o servidor na porta 5000.
+
+Execute o servidor:
+```bash
+python3 server.py
+```
+
+O site estará disponível em: http://localhost:5000
 
 ## Histórico de Mudanças
-- **29/10/2025**: Redesign completo inspirado no site oficial da Pokémon
-  - Removido Firebase (agora usa apenas localStorage)
-  - Adicionadas todas as 190 cartas de Amigos de Jornada
-  - Adicionadas todas as 215 cartas de Tempestade de Prata
-  - Novo design moderno e responsivo
-  - Sistema de filtros e progresso melhorado
-  - Modal para visualização de cartas
+
+### 29/10/2025 - Redesign Completo
+- ✨ Design moderno inspirado no site oficial da Pokémon
+- 🗑️ Removido Firebase (agora 100% local com localStorage)
+- 🃏 Integração com Pokémon TCG API para imagens
+- 📦 **Tempestade de Prata**: Todas as 245 cartas (principais + secretas + Trainer Gallery)
+- 🎯 **Amigos de Jornada**: 159 cartas (imagens pendentes)
+- 🎨 Temas visuais únicos por coleção
+- 📊 Sistema de progresso aprimorado
+- 🔍 Filtros avançados
+- 📱 Interface totalmente responsiva
+
+## Observações Técnicas
+
+### Por que algumas coleções não têm imagens?
+"Amigos de Jornada" (SV09) foi lançada muito recentemente (março de 2025) e as imagens ainda não estão disponíveis no CDN público da Pokémon TCG API. Assim que forem disponibilizadas, o site automaticamente começará a exibir as imagens corretas.
+
+### URLs das Imagens
+- **Tempestade de Prata**: `https://images.pokemontcg.io/swsh12/[NUM].png`
+- **Amigos de Jornada**: `https://images.pokemontcg.io/sv09/[NUM].png` (pendente)
