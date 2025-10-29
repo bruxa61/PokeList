@@ -2,28 +2,28 @@
 // Baseado nos PDFs oficiais da Pokémon TCG
 
 window.pokemonTypes = {
-  grass: { name: 'Grama', icon: '🌿', color: '#78C850' },
-  fire: { name: 'Fogo', icon: '🔥', color: '#F08030' },
-  water: { name: 'Água', icon: '💧', color: '#6890F0' },
-  electric: { name: 'Elétrico', icon: '⚡', color: '#F8D030' },
-  psychic: { name: 'Psíquico', icon: '🔮', color: '#F85888' },
-  fighting: { name: 'Lutador', icon: '🥊', color: '#C03028' },
-  dark: { name: 'Sombrio', icon: '🌙', color: '#705848' },
-  steel: { name: 'Aço', icon: '⚙️', color: '#B8B8D0' },
-  fairy: { name: 'Fada', icon: '✨', color: '#EE99AC' },
-  dragon: { name: 'Dragão', icon: '🐉', color: '#7038F8' },
-  normal: { name: 'Normal', icon: '⭐', color: '#A8A878' }
+  grass: { name: 'Grama', color: '#78C850', symbol: '🌿' },
+  fire: { name: 'Fogo', color: '#F08030', symbol: '🔥' },
+  water: { name: 'Água', color: '#6890F0', symbol: '💧' },
+  electric: { name: 'Elétrico', color: '#F8D030', symbol: '⚡' },
+  psychic: { name: 'Psíquico', color: '#F85888', symbol: '🔮' },
+  fighting: { name: 'Lutador', color: '#C03028', symbol: '🥊' },
+  dark: { name: 'Sombrio', color: '#705848', symbol: '🌙' },
+  steel: { name: 'Aço', color: '#B8B8D0', symbol: '⚙️' },
+  fairy: { name: 'Fada', color: '#EE99AC', symbol: '✨' },
+  dragon: { name: 'Dragão', color: '#7038F8', symbol: '🐉' },
+  normal: { name: 'Normal', color: '#A8A878', symbol: '⭐' }
 };
 
 window.rarityTypes = {
-  common: { name: 'Comum', symbol: '●', color: '#000000' },
-  uncommon: { name: 'Incomum', symbol: '◆', color: '#000000ff' },
-  rare: { name: 'Rara', symbol: '★', color: '#000000ff' },
-  doubleRare: { name: 'Rara Dupla', symbol: '★★', color: '#000000ff' },
-  ultraRare: { name: 'Ultra Rara', symbol: '★★', color: '#ffa600ff' },
-  illustrationRare: { name: 'Ilustração Rara', symbol: '★', color: '#8e17f0ff' },
-  specialIllustration: { name: 'Ilustração Rara Especial', symbol: '★★', color: '#8e17f0ff' },
-  hyperRare: { name: 'Hiper Rara', symbol: '★★★', color: '#ffa600ff' }
+  common: { name: 'Comum', symbol: '●', color: '#4a4a4a', bgColor: '#e0e0e0' },
+  uncommon: { name: 'Incomum', symbol: '◆', color: '#ffffff', bgColor: '#4a90e2' },
+  rare: { name: 'Rara', symbol: '★', color: '#ffffff', bgColor: '#f39c12' },
+  doubleRare: { name: 'Rara Dupla', symbol: '★★', color: '#ffffff', bgColor: '#e74c3c' },
+  ultraRare: { name: 'Ultra Rara', symbol: '★★', color: '#ffffff', bgColor: '#ffa600' },
+  illustrationRare: { name: 'Ilustração Rara', symbol: '★', color: '#ffffff', bgColor: '#8e17f0' },
+  specialIllustration: { name: 'Ilustração Rara Especial', symbol: '★★', color: '#ffffff', bgColor: '#9b59b6' },
+  hyperRare: { name: 'Hiper Rara', symbol: '★★★', color: '#ffffff', bgColor: '#f1c40f' }
 };
 
 window.cardData = {

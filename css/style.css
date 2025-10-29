@@ -360,12 +360,23 @@ body {
   font-size: 1.2rem;
 }
 
+.type-icon-img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2));
+}
+
+.type-icon-fallback {
+  font-size: 1.2rem;
+}
+
 .type-name {
   font-weight: 500;
 }
 
-/* Legenda de Raridades */
-.rarity-legend {
+/* Filtros de Raridade */
+.rarity-filter-group {
   background: var(--white);
   padding: 20px;
   border-radius: var(--border-radius);
@@ -373,37 +384,47 @@ body {
   margin-bottom: 30px;
 }
 
-.legend-title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 12px;
-  color: var(--text-dark);
-}
-
-.legend-items {
+.rarity-filters {
   display: flex;
-  gap: 15px;
+  gap: 10px;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.legend-item {
+.rarity-filter-btn {
+  background: var(--white);
+  border: 2px solid #E0E0E0;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: var(--transition);
+  color: var(--text-dark);
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 12px;
-  background: #F5F5F5;
-  border-radius: 8px;
 }
 
-.legend-symbol {
+.rarity-filter-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.rarity-filter-btn.active {
+  background: var(--rarity-bg, var(--journey-primary));
+  border-color: var(--rarity-bg, var(--journey-primary));
+  color: var(--rarity-color, var(--white));
+  box-shadow: var(--shadow-md);
+}
+
+.rarity-symbol {
   font-weight: 700;
   font-size: 1rem;
 }
 
-.legend-name {
-  font-size: 0.9rem;
-  color: var(--text-dark);
+.rarity-name {
+  font-weight: 500;
 }
 
 /* Cards */
@@ -478,14 +499,14 @@ body {
   position: absolute;
   bottom: 8px;
   left: 8px;
-  padding: 4px 10px;
-  border-radius: 12px;
-  color: var(--white);
-  font-size: 0.75rem;
+  padding: 6px 12px;
+  border-radius: 16px;
+  font-size: 0.85rem;
   font-weight: 700;
-  box-shadow: var(--shadow-md);
   z-index: 2;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255,255,255,0.2);
 }
 
 .card-info {
@@ -517,6 +538,17 @@ body {
   display: flex;
   align-items: center;
   gap: 4px;
+}
+
+.card-type-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
+}
+
+.card-type-fallback {
+  font-size: 0.9rem;
 }
 
 .card-number {

@@ -6,7 +6,8 @@ const collections = {
     theme: 'journey',
     logo: 'https://tcg.pokemon.com/assets/img/sv-expansions/journey-together/logo/pt-br/sv9-logo.png',
     totalCards: 190,
-    imageUrlPattern: (num) => `https://images.pokemontcg.io/sv9/${num}.png`
+    imageUrlPattern: (num) => `https://images.pokemontcg.io/sv9/${num}.png`,
+    headerGradient: 'linear-gradient(135deg, #167eac 0%, #95c5c8 100%)'
   },
   rivals: {
     name: 'Rivais Predestinados',
@@ -14,22 +15,25 @@ const collections = {
     theme: 'rivals',
     logo: 'https://tcg.pokemon.com/assets/img/sv-expansions/destined-rivals/logo/pt-br/sv10-logo.png',
     totalCards: 244,
-    imageUrlPattern: (num) => `https://images.pokemontcg.io/sv10/${num}.png`
+    imageUrlPattern: (num) => `https://images.pokemontcg.io/sv10/${num}.png`,
+    headerGradient: 'linear-gradient(135deg, #c63939 0%, #551452 100%)'
   }
 };
 
 let currentCollection = 'rivals';
 let currentFilter = 'all';
 let currentTypeFilter = 'all';
+let currentRarityFilter = 'all';
 let searchQuery = '';
 let collectedCards = {};
 
 function initializeApp() {
   loadCollectedCards();
   setupEventListeners();
-  renderRarityLegend();
+  renderRarityFilters();
   renderTypeFilters();
   renderCollection();
+  updateHeaderTheme();
 }
 
 function loadCollectedCards() {
@@ -56,6 +60,7 @@ function setupEventListeners() {
     btn.addEventListener('click', () => {
       currentCollection = btn.dataset.collection;
       updateCollectionButtons();
+      updateHeaderTheme();
       renderCollection();
     });
   });
@@ -100,6 +105,27 @@ function setupTypeFilters() {
   });
 }
 
+function setupRarityFilters() {
+  document.querySelectorAll('.rarity-filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      currentRarityFilter = btn.dataset.rarity;
+      
+      // Atualizar estado ativo dos botões
+      document.querySelectorAll('.rarity-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      renderCards();
+    });
+  });
+}
+
+function updateHeaderTheme() {
+  const header = document.querySelector('.header');
+  const collection = collections[currentCollection];
+  
+  header.style.background = collection.headerGradient;
+}
+
 function updateCollectionButtons() {
   document.querySelectorAll('.collection-btn').forEach(btn => {
     btn.classList.remove('active', 'rivals-theme');
@@ -124,19 +150,32 @@ function updateFilterButtons() {
   });
 }
 
-function renderRarityLegend() {
-  const legendContainer = document.getElementById('rarity-legend');
-  legendContainer.innerHTML = '';
+function renderRarityFilters() {
+  const rarityFiltersContainer = document.getElementById('rarity-filters');
+  rarityFiltersContainer.innerHTML = '';
   
+  // Botão "Todas as Raridades"
+  const allBtn = document.createElement('button');
+  allBtn.className = 'rarity-filter-btn active';
+  allBtn.dataset.rarity = 'all';
+  allBtn.innerHTML = `<span>Todas</span>`;
+  rarityFiltersContainer.appendChild(allBtn);
+  
+  // Botões para cada raridade
   Object.entries(window.rarityTypes).forEach(([key, rarity]) => {
-    const item = document.createElement('div');
-    item.className = 'legend-item';
-    item.innerHTML = `
-      <span class="legend-symbol" style="color: ${rarity.color}">${rarity.symbol}</span>
-      <span class="legend-name">${rarity.name}</span>
+    const btn = document.createElement('button');
+    btn.className = 'rarity-filter-btn';
+    btn.dataset.rarity = key;
+    btn.style.setProperty('--rarity-bg', rarity.bgColor);
+    btn.style.setProperty('--rarity-color', rarity.color);
+    btn.innerHTML = `
+      <span class="rarity-symbol">${rarity.symbol}</span>
+      <span class="rarity-name">${rarity.name}</span>
     `;
-    legendContainer.appendChild(item);
+    rarityFiltersContainer.appendChild(btn);
   });
+  
+  setupRarityFilters();
 }
 
 function renderTypeFilters() {
@@ -157,7 +196,7 @@ function renderTypeFilters() {
     btn.dataset.type = key;
     btn.style.setProperty('--type-color', type.color);
     btn.innerHTML = `
-      <span class="type-icon">${type.icon}</span>
+      <span class="type-icon">${type.symbol}</span>
       <span class="type-name">${type.name}</span>
     `;
     typeFiltersContainer.appendChild(btn);
@@ -207,6 +246,9 @@ function renderCards() {
     // Filtro de tipo
     if (currentTypeFilter !== 'all' && cardInfo.type !== currentTypeFilter) return;
     
+    // Filtro de raridade
+    if (currentRarityFilter !== 'all' && cardInfo.rarity !== currentRarityFilter) return;
+    
     // Filtro de pesquisa
     if (searchQuery && !cardInfo.name.toLowerCase().includes(searchQuery)) return;
     
@@ -244,7 +286,7 @@ function createCardElement(cardInfo, isCollected, collection) {
         onerror="this.src='https://tcg.pokemon.com/assets/img/global/tcg-card-back.jpg'"
       >
       ${isCollected ? '<div class="collected-badge">✓</div>' : ''}
-      <div class="rarity-badge" style="background-color: ${rarity.color}">
+      <div class="rarity-badge" style="background: ${rarity.bgColor}; color: ${rarity.color}; box-shadow: 0 2px 8px rgba(0,0,0,0.2)">
         ${rarity.symbol}
       </div>
     </div>
@@ -252,7 +294,7 @@ function createCardElement(cardInfo, isCollected, collection) {
       <p class="card-name">${cardInfo.name}</p>
       <div class="card-meta">
         <span class="card-type" style="color: ${pokemonType.color}">
-          ${pokemonType.icon} ${pokemonType.name}
+          ${pokemonType.symbol} ${pokemonType.name}
         </span>
         <span class="card-number">#${displayNum}</span>
       </div>
