@@ -10,9 +10,11 @@ This is a web-based checklist application for tracking Pokémon Trading Card Gam
 - Added pokéball favicon for better visual branding
 - Implemented interactive rarity filter system (replaced static legend)
 - Enhanced theming system with dynamic header gradients that change based on collection
-- Improved type icon system using emoji symbols (lightweight, no external dependencies)
+- Replaced emoji icons with custom SVG icons for all 18 Pokémon types
+- Added 7 missing Pokémon types (Ice, Poison, Ground, Flying, Bug, Rock, Ghost)
 - Redesigned rarity badges with better colors and removed dark background
 - Made collection metadata more flexible by including headerGradient in collection objects
+- Changed default collection to "Amigos de Jornada" (Journey Together)
 
 ## User Preferences
 

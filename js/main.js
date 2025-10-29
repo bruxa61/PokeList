@@ -273,8 +273,8 @@ function createCardElement(cardInfo, isCollected, collection) {
   const displayNum = String(cardInfo.num).padStart(3, '0');
   const imageUrl = collection.imageUrlPattern(cardInfo.num);
   
-  const pokemonType = window.pokemonTypes[cardInfo.type];
-  const rarity = window.rarityTypes[cardInfo.rarity];
+  const pokemonType = window.pokemonTypes[cardInfo.type] || window.pokemonTypes['normal'];
+  const rarity = window.rarityTypes[cardInfo.rarity] || window.rarityTypes['common'];
   
   card.innerHTML = `
     <div class="card-image-container">
