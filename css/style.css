@@ -8,9 +8,9 @@
   --journey-primary: #4A90E2;
   --journey-secondary: #E3F2FD;
   --journey-accent: #2196F3;
-  --silver-primary: #9C27B0;
-  --silver-secondary: #F3E5F5;
-  --silver-accent: #7B1FA2;
+  --rivals-primary: #E91E63;
+  --rivals-secondary: #FCE4EC;
+  --rivals-accent: #C2185B;
   --text-dark: #212121;
   --text-light: #757575;
   --bg-light: #F5F5F5;
@@ -93,9 +93,9 @@ body {
   box-shadow: var(--shadow-md);
 }
 
-.collection-btn.active.silver-theme {
-  border-color: var(--silver-primary);
-  background: linear-gradient(135deg, var(--silver-primary) 0%, var(--silver-accent) 100%);
+.collection-btn.active.rivals-theme {
+  border-color: var(--rivals-primary);
+  background: linear-gradient(135deg, var(--rivals-primary) 0%, var(--rivals-accent) 100%);
 }
 
 .collection-name {
@@ -121,8 +121,8 @@ body {
   transition: var(--transition);
 }
 
-.progress-card.silver-theme {
-  border-left-color: var(--silver-primary);
+.progress-card.rivals-theme {
+  border-left-color: var(--rivals-primary);
 }
 
 .progress-header {
@@ -177,8 +177,8 @@ body {
   line-height: 1;
 }
 
-.progress-card.silver-theme .stat-value {
-  color: var(--silver-primary);
+.progress-card.rivals-theme .stat-value {
+  color: var(--rivals-primary);
 }
 
 .stat-label {
@@ -210,8 +210,8 @@ body {
   border-radius: 6px;
 }
 
-.progress-card.silver-theme .progress-bar {
-  background: linear-gradient(90deg, var(--silver-primary), var(--silver-accent));
+.progress-card.rivals-theme .progress-bar {
+  background: linear-gradient(90deg, var(--rivals-primary), var(--rivals-accent));
 }
 
 .progress-percentage {
@@ -252,9 +252,9 @@ body {
   color: var(--white);
 }
 
-.filter-btn.silver-theme.active {
-  background: var(--silver-primary);
-  border-color: var(--silver-primary);
+.filter-btn.rivals-theme.active {
+  background: var(--rivals-primary);
+  border-color: var(--rivals-primary);
 }
 
 .card-grid {

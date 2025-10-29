@@ -4,29 +4,21 @@ const collections = {
     name: 'Amigos de Jornada',
     code: 'SV09',
     theme: 'journey',
-    totalCards: 159,
+    totalCards: 190,
     imageUrlPattern: (num) => {
-      // SV09 ainda não está no CDN pokemontcg.io, usando placeholder
-      return `https://tcg.pokemon.com/assets/img/global/tcg-card-back.jpg`;
+      return `https://images.pokemontcg.io/sv9/${num}.png`;
     },
-    cardNumbers: generateCardNumbers(1, 159)
+    cardNumbers: generateCardNumbers(1, 190)
   },
-  silver: {
-    name: 'Tempestade de Prata',
-    code: 'SWSH12',
-    theme: 'silver',
-    totalCards: 245,
+  rivals: {
+    name: 'Rivais Predestinados',
+    code: 'SV10',
+    theme: 'rivals',
+    totalCards: 244,
     imageUrlPattern: (num) => {
-      if (typeof num === 'string' && num.startsWith('TG')) {
-        return `https://images.pokemontcg.io/swsh12/${num}.png`;
-      }
-      return `https://images.pokemontcg.io/swsh12/${num}.png`;
+      return `https://images.pokemontcg.io/sv10/${num}.png`;
     },
-    cardNumbers: [
-      ...generateCardNumbers(1, 195),
-      ...generateCardNumbers(196, 215),
-      ...generateTrainerGalleryNumbers()
-    ]
+    cardNumbers: generateCardNumbers(1, 244)
   }
 };
 
@@ -38,15 +30,7 @@ function generateCardNumbers(start, end) {
   return numbers;
 }
 
-function generateTrainerGalleryNumbers() {
-  const tgCards = [];
-  for (let i = 1; i <= 30; i++) {
-    tgCards.push(`TG${String(i).padStart(2, '0')}`);
-  }
-  return tgCards;
-}
-
-let currentCollection = 'silver'; // Começar com Silver que tem imagens
+let currentCollection = 'rivals'; // Começar com Rivais que tem imagens
 let currentFilter = 'all';
 let collectedCards = {};
 
@@ -67,7 +51,7 @@ function loadCollectedCards() {
   }
   
   if (!collectedCards.journey) collectedCards.journey = [];
-  if (!collectedCards.silver) collectedCards.silver = [];
+  if (!collectedCards.rivals) collectedCards.rivals = [];
 }
 
 function saveCollectedCards() {
@@ -109,11 +93,11 @@ function setupEventListeners() {
 
 function updateCollectionButtons() {
   document.querySelectorAll('.collection-btn').forEach(btn => {
-    btn.classList.remove('active', 'silver-theme');
+    btn.classList.remove('active', 'rivals-theme');
     if (btn.dataset.collection === currentCollection) {
       btn.classList.add('active');
-      if (currentCollection === 'silver') {
-        btn.classList.add('silver-theme');
+      if (currentCollection === 'rivals') {
+        btn.classList.add('rivals-theme');
       }
     }
   });
@@ -121,11 +105,11 @@ function updateCollectionButtons() {
 
 function updateFilterButtons() {
   document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.classList.remove('active', 'silver-theme');
+    btn.classList.remove('active', 'rivals-theme');
     if (btn.dataset.filter === currentFilter) {
       btn.classList.add('active');
-      if (currentCollection === 'silver') {
-        btn.classList.add('silver-theme');
+      if (currentCollection === 'rivals') {
+        btn.classList.add('rivals-theme');
       }
     }
   });
@@ -137,9 +121,9 @@ function renderCollection() {
   document.getElementById('collection-title').textContent = collection.name;
   
   const progressCard = document.querySelector('.progress-card');
-  progressCard.classList.remove('silver-theme');
-  if (currentCollection === 'silver') {
-    progressCard.classList.add('silver-theme');
+  progressCard.classList.remove('rivals-theme');
+  if (currentCollection === 'rivals') {
+    progressCard.classList.add('rivals-theme');
   }
   
   updateFilterButtons();
@@ -170,16 +154,8 @@ function createCardElement(cardNum, isCollected, collection) {
   card.className = `card-item ${isCollected ? 'collected' : 'not-collected'}`;
   card.dataset.cardNum = cardNum;
   
-  let displayNum, imageNum;
-  if (typeof cardNum === 'string') {
-    displayNum = cardNum;
-    imageNum = cardNum;
-  } else {
-    displayNum = String(cardNum).padStart(3, '0');
-    imageNum = cardNum;
-  }
-  
-  const imageUrl = collection.imageUrlPattern(imageNum);
+  const displayNum = String(cardNum).padStart(3, '0');
+  const imageUrl = collection.imageUrlPattern(cardNum);
   
   card.innerHTML = `
     <div class="card-image-container">
@@ -217,16 +193,8 @@ function updateProgress() {
 function openModal(cardNum, isCollected, collection) {
   const modal = document.getElementById('card-modal');
   
-  let displayNum, imageNum;
-  if (typeof cardNum === 'string') {
-    displayNum = cardNum;
-    imageNum = cardNum;
-  } else {
-    displayNum = String(cardNum).padStart(3, '0');
-    imageNum = cardNum;
-  }
-  
-  const imageUrl = collection.imageUrlPattern(imageNum);
+  const displayNum = String(cardNum).padStart(3, '0');
+  const imageUrl = collection.imageUrlPattern(cardNum);
   
   document.getElementById('modal-image').src = imageUrl;
   document.getElementById('modal-name').textContent = `Carta #${displayNum}`;
