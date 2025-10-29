@@ -1,7 +1,7 @@
 // Dados completos das cartas das coleções SV09 e SV10
 // Baseado nos PDFs oficiais da Pokémon TCG
 
-const pokemonTypes = {
+window.pokemonTypes = {
   grass: { name: 'Grama', icon: '🌿', color: '#78C850' },
   fire: { name: 'Fogo', icon: '🔥', color: '#F08030' },
   water: { name: 'Água', icon: '💧', color: '#6890F0' },
@@ -15,7 +15,7 @@ const pokemonTypes = {
   colorless: { name: 'Incolor', icon: '⭐', color: '#A8A878' }
 };
 
-const rarityTypes = {
+window.rarityTypes = {
   common: { name: 'Comum', symbol: '●', color: '#000000' },
   uncommon: { name: 'Incomum', symbol: '◆', color: '#4A4A4A' },
   rare: { name: 'Rara', symbol: '★', color: '#FFD700' },
@@ -26,7 +26,7 @@ const rarityTypes = {
   hyperRare: { name: 'Hiper Rara', symbol: 'HR', color: '#FFD700' }
 };
 
-const cardData = {
+window.cardData = {
   journey: [
     { num: 1, name: 'Caterpie', type: 'grass', rarity: 'common' },
     { num: 2, name: 'Metapod', type: 'grass', rarity: 'common' },
@@ -466,8 +466,3 @@ const cardData = {
     { num: 244, name: 'Energia Elétrica', type: 'colorless', rarity: 'uncommon' }
   ]
 };
-
-// Exportar para uso global
-window.pokemonTypes = pokemonTypes;
-window.rarityTypes = rarityTypes;
-window.cardData = cardData;
