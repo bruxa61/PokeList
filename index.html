@@ -4,57 +4,75 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Checklist Pokémon TCG</title>
-
-  <!-- Tailwind -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Fonte -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-
-  <!-- CSS -->
   <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Flexo:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
-<body class="min-h-screen transition-colors duration-500">
-
-  <!-- Loading -->
-  <div id="loading-overlay" class="loading-overlay">
-    <svg class="animate-spin -ml-1 mr-3 h-10 w-10 text-gray-800" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-    </svg>
-    <span class="text-xl font-semibold text-gray-800">Carregando dados...</span>
+<body>
+  <div class="header">
+    <div class="container">
+      <h1 class="main-title">Checklist de Cartas Pokémon TCG</h1>
+      <p class="subtitle">Organize sua coleção e acompanhe seu progresso</p>
+    </div>
   </div>
 
-  <!-- Conteúdo Principal -->
-  <div id="main-container" class="container mx-auto p-4 md:p-8 pt-10 opacity-0 transition-opacity duration-500">
-    <header class="text-center mb-8">
-      <h1 class="text-4xl md:text-5xl font-extrabold text-gray-800 mb-2">Checklist de Cartas Pokémon TCG</h1>
-      <p id="current-user-id" class="text-sm font-mono text-gray-500 mb-6">ID do Usuário: Carregando...</p>
-    </header>
-
-    <!-- Botões -->
-    <div class="flex flex-col md:flex-row gap-4 mb-10 justify-center">
-      <button id="btn-journey" data-collection="journey" class="collection-btn">Amigos de Jornada</button>
-      <button id="btn-rivals" data-collection="rivals" class="collection-btn">Rivais Predestinados</button>
+  <div class="container">
+    <div class="collection-selector">
+      <button class="collection-btn active" data-collection="journey">
+        <span class="collection-name">Amigos de Jornada</span>
+        <span class="collection-code">SV09</span>
+      </button>
+      <button class="collection-btn" data-collection="silver">
+        <span class="collection-name">Tempestade de Prata</span>
+        <span class="collection-code">SWSH12</span>
+      </button>
     </div>
 
-    <!-- Estatísticas -->
-    <div class="p-5 rounded-xl mb-8 shadow-xl theme-bg transition-colors duration-500">
-      <h2 id="collection-title" class="text-3xl font-bold text-gray-800 mb-2">Coleção Selecionada</h2>
-      <p id="collection-stats" class="text-xl font-medium text-gray-700">Cartas Encontradas: 0 / 0 (0%)</p>
+    <div class="progress-section">
+      <div class="progress-card">
+        <div class="progress-header">
+          <h2 id="collection-title">Amigos de Jornada</h2>
+          <button class="reset-btn" id="reset-collection">Limpar Tudo</button>
+        </div>
+        <div class="progress-stats">
+          <div class="stat-item">
+            <span class="stat-value" id="collected-count">0</span>
+            <span class="stat-label">Coletadas</span>
+          </div>
+          <div class="stat-divider">/</div>
+          <div class="stat-item">
+            <span class="stat-value" id="total-count">0</span>
+            <span class="stat-label">Total</span>
+          </div>
+        </div>
+        <div class="progress-bar-container">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <p class="progress-percentage" id="progress-percentage">0%</p>
+      </div>
     </div>
 
-    <!-- Legenda -->
-    <div class="mb-8 p-4 bg-white rounded-xl shadow-lg">
-      <h3 class="text-xl font-semibold mb-3 border-b pb-2 text-gray-800">Legenda de Raridade</h3>
-      <div id="rarity-legend" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 text-gray-700"></div>
+    <div class="filters-section">
+      <button class="filter-btn active" data-filter="all">Ver Todas</button>
+      <button class="filter-btn" data-filter="collected">Coletadas</button>
+      <button class="filter-btn" data-filter="missing">Faltando</button>
     </div>
 
-    <!-- Cartas -->
-    <div id="card-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"></div>
+    <div id="card-grid" class="card-grid"></div>
   </div>
 
-  <!-- JS -->
-  <script type="module" src="js/main.js"></script>
+  <div class="modal" id="card-modal">
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+    <div class="modal-content">
+      <button class="modal-close" id="modal-close">&times;</button>
+      <img id="modal-image" src="" alt="">
+      <div class="modal-info">
+        <h3 id="modal-name"></h3>
+        <p id="modal-number"></p>
+        <button class="modal-toggle" id="modal-toggle"></button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
 </body>
 </html>

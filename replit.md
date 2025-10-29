@@ -1,42 +1,74 @@
 # Checklist Pokémon TCG
 
-## Project Overview
-A web-based checklist application for tracking Pokémon Trading Card Game collections. Users can mark cards as owned/not owned across different card sets (Amigos de Jornada and Rivais Predestinados).
+## Visão Geral
+Aplicação web para acompanhar sua coleção de cartas Pokémon TCG. Marque cartas como coletadas, acompanhe seu progresso e organize sua coleção com um design moderno inspirado no site oficial da Pokémon.
 
-## Tech Stack
-- **Frontend**: HTML, CSS (Tailwind CDN), JavaScript (ES6 modules)
-- **Backend**: Firebase (Authentication + Firestore)
-- **Server**: Python HTTP server for static file serving
+## Stack Tecnológico
+- **Frontend**: HTML5, CSS3, JavaScript (Vanilla)
+- **Armazenamento**: localStorage (sem banco de dados)
+- **Servidor**: Python HTTP server para desenvolvimento
+- **Imagens**: CDN oficial da Pokémon
 
-## Project Structure
+## Estrutura do Projeto
 ```
 /
-├── index.html        # Main HTML file
+├── index.html        # Página principal
 ├── css/
-│   └── style.css    # Custom styles
+│   └── style.css    # Estilos customizados e responsivos
 ├── js/
-│   └── main.js      # Main application logic with Firebase integration
-└── server.py        # Simple HTTP server for development
+│   └── main.js      # Lógica da aplicação e localStorage
+└── server.py        # Servidor HTTP para desenvolvimento
 ```
 
-## Firebase Configuration
-The application expects Firebase configuration to be injected via global variables:
-- `__app_id`: Application identifier
-- `__firebase_config`: Firebase configuration JSON
-- `__initial_auth_token`: Optional custom auth token
+## Funcionalidades
 
-Without Firebase config, the app will still load but won't persist data.
+### Coleções Disponíveis
+1. **Amigos de Jornada (SV09)** - 190 cartas
+2. **Tempestade de Prata (SWSH12)** - 215 cartas
 
-## Features
-- Two card collections: "Amigos de Jornada" and "Rivais Predestinados"
-- Visual card tracking with grayscale/color toggle
-- Real-time sync with Firestore
-- Anonymous authentication support
-- Rarity-based card categorization (Common, Uncommon, Rare, Hyper Rare)
-- Progress tracking with statistics
+### Recursos
+- ✅ Marcação de cartas coletadas com um clique
+- 📊 Acompanhamento de progresso em tempo real
+- 🎨 Temas visuais distintos para cada coleção
+- 🔍 Filtros: Ver todas / Coletadas / Faltando
+- 💾 Salvamento automático via localStorage
+- 📱 Design responsivo para mobile e desktop
+- 🖼️ Modal com visualização ampliada das cartas
+- 🗑️ Opção de limpar toda a coleção
 
-## Development
-The app runs on port 5000 using a Python HTTP server that serves static files.
+### Design
+- Interface inspirada no site oficial da Pokémon TCG
+- Cartas não coletadas aparecem em escala de cinza
+- Cartas coletadas com check verde e cores vibrantes
+- Barra de progresso animada
+- Efeitos de hover e transições suaves
 
-## Recent Changes
-- Initial project setup in Replit environment (Oct 29, 2025)
+## Como Funciona
+
+### Armazenamento
+Os dados são salvos localmente no navegador usando localStorage:
+```javascript
+{
+  "journey": [1, 5, 10, 23, ...],  // IDs das cartas coletadas
+  "silver": [2, 8, 15, ...]
+}
+```
+
+### Estrutura das Cartas
+Cada coleção define:
+- Nome e código da coleção
+- Total de cartas
+- Padrão de URL das imagens
+- Tema de cores
+
+## Desenvolvimento
+Execute `python3 server.py` para iniciar o servidor na porta 5000.
+
+## Histórico de Mudanças
+- **29/10/2025**: Redesign completo inspirado no site oficial da Pokémon
+  - Removido Firebase (agora usa apenas localStorage)
+  - Adicionadas todas as 190 cartas de Amigos de Jornada
+  - Adicionadas todas as 215 cartas de Tempestade de Prata
+  - Novo design moderno e responsivo
+  - Sistema de filtros e progresso melhorado
+  - Modal para visualização de cartas
