@@ -45,15 +45,32 @@ body {
   box-shadow: var(--shadow-md);
 }
 
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.collection-logo {
+  max-width: 300px;
+  max-height: 80px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+}
+
+.header-text {
+  text-align: center;
+}
+
 .main-title {
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 8px;
-  text-align: center;
 }
 
 .subtitle {
-  text-align: center;
   font-size: 1.1rem;
   opacity: 0.95;
 }
@@ -221,12 +238,58 @@ body {
   color: var(--text-dark);
 }
 
+/* Barra de Pesquisa */
+.search-section {
+  margin-bottom: 25px;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  display: block;
+  padding: 14px 20px;
+  font-size: 1.1rem;
+  border: 2px solid #E0E0E0;
+  border-radius: 25px;
+  background: var(--white);
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--journey-primary);
+  box-shadow: var(--shadow-md);
+}
+
+/* Filtros */
 .filters-section {
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.filter-group {
+  background: var(--white);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
+}
+
+.filter-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--text-dark);
+}
+
+.filter-buttons {
   display: flex;
   gap: 12px;
-  justify-content: center;
-  margin-bottom: 30px;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .filter-btn {
@@ -257,6 +320,93 @@ body {
   border-color: var(--rivals-primary);
 }
 
+/* Filtros de Tipo */
+.type-filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.type-filter-btn {
+  background: var(--white);
+  border: 2px solid #E0E0E0;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: var(--transition);
+  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.type-filter-btn:hover {
+  border-color: var(--type-color, var(--journey-primary));
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.type-filter-btn.active {
+  background: var(--type-color, var(--journey-primary));
+  border-color: var(--type-color, var(--journey-primary));
+  color: var(--white);
+  box-shadow: var(--shadow-md);
+}
+
+.type-icon {
+  font-size: 1.2rem;
+}
+
+.type-name {
+  font-weight: 500;
+}
+
+/* Legenda de Raridades */
+.rarity-legend {
+  background: var(--white);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 30px;
+}
+
+.legend-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--text-dark);
+}
+
+.legend-items {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: #F5F5F5;
+  border-radius: 8px;
+}
+
+.legend-symbol {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.legend-name {
+  font-size: 0.9rem;
+  color: var(--text-dark);
+}
+
+/* Cards */
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -283,28 +433,9 @@ body {
   border: 3px solid var(--success);
 }
 
-.card-item.collected::after {
-  content: '✓';
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background: var(--success);
-  color: var(--white);
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  font-weight: bold;
-  box-shadow: var(--shadow-md);
-  z-index: 2;
-}
-
 .card-item.not-collected {
-  opacity: 0.5;
-  filter: grayscale(100%);
+  opacity: 0.6;
+  filter: grayscale(80%);
 }
 
 .card-image-container {
@@ -325,145 +456,97 @@ body {
   transition: var(--transition);
 }
 
+.collected-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: var(--success);
+  color: var(--white);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  box-shadow: var(--shadow-md);
+  z-index: 2;
+}
+
+.rarity-badge {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  color: var(--white);
+  font-size: 0.75rem;
+  font-weight: 700;
+  box-shadow: var(--shadow-md);
+  z-index: 2;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
 .card-info {
   padding: 12px;
-  text-align: center;
   background: var(--white);
 }
 
+.card-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 6px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  gap: 8px;
+}
+
+.card-type {
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
 .card-number {
-  font-size: 0.85rem;
   color: var(--text-light);
   font-weight: 500;
 }
 
-.modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1000;
-  align-items: center;
-  justify-content: center;
-}
-
-.modal.active {
-  display: flex;
-}
-
-.modal-backdrop {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(5px);
-}
-
-.modal-content {
-  position: relative;
-  background: var(--white);
-  border-radius: var(--border-radius);
-  padding: 24px;
-  max-width: 500px;
-  width: 90%;
-  max-height: 90vh;
-  overflow-y: auto;
-  box-shadow: var(--shadow-lg);
-  animation: modalSlideIn 0.3s ease;
-}
-
-@keyframes modalSlideIn {
-  from {
-    transform: translateY(-50px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.modal-close {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: none;
-  border: none;
-  font-size: 2rem;
-  cursor: pointer;
-  color: var(--text-light);
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  transition: var(--transition);
-}
-
-.modal-close:hover {
-  background: #f5f5f5;
-  color: var(--text-dark);
-}
-
-.modal-content img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin-bottom: 16px;
-}
-
-.modal-info {
+/* Mensagem Vazia */
+.empty-message {
+  grid-column: 1 / -1;
   text-align: center;
-}
-
-.modal-info h3 {
-  font-size: 1.5rem;
-  margin-bottom: 8px;
-  color: var(--text-dark);
-}
-
-.modal-info p {
+  padding: 60px 20px;
   color: var(--text-light);
-  margin-bottom: 20px;
+  font-size: 1.2rem;
 }
 
-.modal-toggle {
-  width: 100%;
-  padding: 14px;
-  border: none;
-  border-radius: 8px;
-  font-size: 1.1rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-.modal-toggle.collected {
-  background: #EF5350;
-  color: var(--white);
-}
-
-.modal-toggle.collected:hover {
-  background: #E53935;
-}
-
-.modal-toggle.not-collected {
-  background: var(--success);
-  color: var(--white);
-}
-
-.modal-toggle.not-collected:hover {
-  background: #45a049;
-}
-
+/* Responsivo */
 @media (max-width: 768px) {
+  .collection-logo {
+    max-width: 200px;
+    max-height: 60px;
+  }
+
   .main-title {
-    font-size: 2rem;
+    font-size: 1.8rem;
+  }
+
+  .header-content {
+    flex-direction: column;
+    gap: 15px;
   }
   
   .card-grid {
@@ -478,19 +561,47 @@ body {
   .stat-value {
     font-size: 2rem;
   }
+
+  .filter-group {
+    padding: 15px;
+  }
+
+  .type-filters {
+    gap: 8px;
+  }
+
+  .type-filter-btn {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+  }
 }
 
 @media (max-width: 480px) {
+  .collection-logo {
+    max-width: 180px;
+    max-height: 50px;
+  }
+
   .main-title {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
   }
   
   .card-grid {
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
   }
   
   .collection-btn {
     min-width: 150px;
     padding: 12px 20px;
+  }
+
+  .search-input {
+    font-size: 1rem;
+    padding: 12px 16px;
+  }
+
+  .filter-title {
+    font-size: 1rem;
   }
 }

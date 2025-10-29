@@ -4,39 +4,31 @@ const collections = {
     name: 'Amigos de Jornada',
     code: 'SV09',
     theme: 'journey',
+    logo: 'https://images.squarespace-cdn.com/content/v1/5cf4cfa4382ac0000123aa1b/1736441507950-EBYE929POGW302CQP8PA/Pokemon_TCG_Scarlet_Violet%E2%80%94Journey_Together_Logo+%281%29.png',
     totalCards: 190,
-    imageUrlPattern: (num) => {
-      return `https://images.pokemontcg.io/sv9/${num}.png`;
-    },
-    cardNumbers: generateCardNumbers(1, 190)
+    imageUrlPattern: (num) => `https://images.pokemontcg.io/sv9/${num}.png`
   },
   rivals: {
     name: 'Rivais Predestinados',
     code: 'SV10',
     theme: 'rivals',
+    logo: 'https://images.squarespace-cdn.com/content/v1/5cf4cfa4382ac0000123aa1b/1742827441679-4VIFZPI6H1DUBO1D76WV/Pokemon_TCG_Scarlet_Violet%E2%80%94Destined_Rivals_Logo.png',
     totalCards: 244,
-    imageUrlPattern: (num) => {
-      return `https://images.pokemontcg.io/sv10/${num}.png`;
-    },
-    cardNumbers: generateCardNumbers(1, 244)
+    imageUrlPattern: (num) => `https://images.pokemontcg.io/sv10/${num}.png`
   }
 };
 
-function generateCardNumbers(start, end) {
-  const numbers = [];
-  for (let i = start; i <= end; i++) {
-    numbers.push(i);
-  }
-  return numbers;
-}
-
-let currentCollection = 'rivals'; // Começar com Rivais que tem imagens
+let currentCollection = 'rivals';
 let currentFilter = 'all';
+let currentTypeFilter = 'all';
+let searchQuery = '';
 let collectedCards = {};
 
 function initializeApp() {
   loadCollectedCards();
   setupEventListeners();
+  renderRarityLegend();
+  renderTypeFilters();
   renderCollection();
 }
 
@@ -59,6 +51,7 @@ function saveCollectedCards() {
 }
 
 function setupEventListeners() {
+  // Seletores de coleção
   document.querySelectorAll('.collection-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       currentCollection = btn.dataset.collection;
@@ -67,6 +60,7 @@ function setupEventListeners() {
     });
   });
 
+  // Filtros de status
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       currentFilter = btn.dataset.filter;
@@ -75,6 +69,7 @@ function setupEventListeners() {
     });
   });
 
+  // Botão de limpar
   document.getElementById('reset-collection').addEventListener('click', () => {
     if (confirm('Tem certeza que deseja limpar todas as cartas desta coleção?')) {
       collectedCards[currentCollection] = [];
@@ -83,11 +78,25 @@ function setupEventListeners() {
     }
   });
 
-  document.getElementById('modal-backdrop').addEventListener('click', closeModal);
-  document.getElementById('modal-close').addEventListener('click', closeModal);
-  
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeModal();
+  // Barra de pesquisa
+  const searchInput = document.getElementById('search-input');
+  searchInput.addEventListener('input', (e) => {
+    searchQuery = e.target.value.toLowerCase();
+    renderCards();
+  });
+}
+
+function setupTypeFilters() {
+  document.querySelectorAll('.type-filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      currentTypeFilter = btn.dataset.type;
+      
+      // Atualizar estado ativo dos botões
+      document.querySelectorAll('.type-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      renderCards();
+    });
   });
 }
 
@@ -115,11 +124,60 @@ function updateFilterButtons() {
   });
 }
 
+function renderRarityLegend() {
+  const legendContainer = document.getElementById('rarity-legend');
+  legendContainer.innerHTML = '';
+  
+  Object.entries(window.rarityTypes).forEach(([key, rarity]) => {
+    const item = document.createElement('div');
+    item.className = 'legend-item';
+    item.innerHTML = `
+      <span class="legend-symbol" style="color: ${rarity.color}">${rarity.symbol}</span>
+      <span class="legend-name">${rarity.name}</span>
+    `;
+    legendContainer.appendChild(item);
+  });
+}
+
+function renderTypeFilters() {
+  const typeFiltersContainer = document.getElementById('type-filters');
+  typeFiltersContainer.innerHTML = '';
+  
+  // Botão "Todos os Tipos"
+  const allBtn = document.createElement('button');
+  allBtn.className = 'type-filter-btn active';
+  allBtn.dataset.type = 'all';
+  allBtn.innerHTML = `<span>Todos</span>`;
+  typeFiltersContainer.appendChild(allBtn);
+  
+  // Botões para cada tipo
+  Object.entries(window.pokemonTypes).forEach(([key, type]) => {
+    const btn = document.createElement('button');
+    btn.className = 'type-filter-btn';
+    btn.dataset.type = key;
+    btn.style.setProperty('--type-color', type.color);
+    btn.innerHTML = `
+      <span class="type-icon">${type.icon}</span>
+      <span class="type-name">${type.name}</span>
+    `;
+    typeFiltersContainer.appendChild(btn);
+  });
+  
+  setupTypeFilters();
+}
+
 function renderCollection() {
   const collection = collections[currentCollection];
   
+  // Atualizar título
   document.getElementById('collection-title').textContent = collection.name;
   
+  // Atualizar logo
+  const logo = document.getElementById('collection-logo');
+  logo.src = collection.logo;
+  logo.alt = `Logo ${collection.name}`;
+  
+  // Atualizar tema
   const progressCard = document.querySelector('.progress-card');
   progressCard.classList.remove('rivals-theme');
   if (currentCollection === 'rivals') {
@@ -137,42 +195,72 @@ function renderCards() {
   cardGrid.innerHTML = '';
   
   const collected = collectedCards[currentCollection] || [];
+  const cards = window.cardData[currentCollection] || [];
   
-  collection.cardNumbers.forEach(num => {
-    const isCollected = collected.includes(num);
+  cards.forEach(cardInfo => {
+    const isCollected = collected.includes(cardInfo.num);
     
+    // Filtro de status
     if (currentFilter === 'collected' && !isCollected) return;
     if (currentFilter === 'missing' && isCollected) return;
     
-    const cardElement = createCardElement(num, isCollected, collection);
+    // Filtro de tipo
+    if (currentTypeFilter !== 'all' && cardInfo.type !== currentTypeFilter) return;
+    
+    // Filtro de pesquisa
+    if (searchQuery && !cardInfo.name.toLowerCase().includes(searchQuery)) return;
+    
+    const cardElement = createCardElement(cardInfo, isCollected, collection);
     cardGrid.appendChild(cardElement);
   });
+  
+  // Mostrar mensagem se não houver cartas
+  if (cardGrid.children.length === 0) {
+    const emptyMessage = document.createElement('div');
+    emptyMessage.className = 'empty-message';
+    emptyMessage.textContent = 'Nenhuma carta encontrada com os filtros selecionados';
+    cardGrid.appendChild(emptyMessage);
+  }
 }
 
-function createCardElement(cardNum, isCollected, collection) {
+function createCardElement(cardInfo, isCollected, collection) {
   const card = document.createElement('div');
   card.className = `card-item ${isCollected ? 'collected' : 'not-collected'}`;
-  card.dataset.cardNum = cardNum;
+  card.dataset.cardNum = cardInfo.num;
   
-  const displayNum = String(cardNum).padStart(3, '0');
-  const imageUrl = collection.imageUrlPattern(cardNum);
+  const displayNum = String(cardInfo.num).padStart(3, '0');
+  const imageUrl = collection.imageUrlPattern(cardInfo.num);
+  
+  const pokemonType = window.pokemonTypes[cardInfo.type];
+  const rarity = window.rarityTypes[cardInfo.rarity];
   
   card.innerHTML = `
     <div class="card-image-container">
       <img 
         class="card-image" 
         src="${imageUrl}" 
-        alt="Carta ${displayNum}"
+        alt="${cardInfo.name}"
         loading="lazy"
         onerror="this.src='https://tcg.pokemon.com/assets/img/global/tcg-card-back.jpg'"
       >
+      ${isCollected ? '<div class="collected-badge">✓</div>' : ''}
+      <div class="rarity-badge" style="background-color: ${rarity.color}">
+        ${rarity.symbol}
+      </div>
     </div>
     <div class="card-info">
-      <p class="card-number">#${displayNum}</p>
+      <p class="card-name">${cardInfo.name}</p>
+      <div class="card-meta">
+        <span class="card-type" style="color: ${pokemonType.color}">
+          ${pokemonType.icon} ${pokemonType.name}
+        </span>
+        <span class="card-number">#${displayNum}</span>
+      </div>
     </div>
   `;
   
-  card.addEventListener('click', () => openModal(cardNum, isCollected, collection));
+  // Clicar na carta adiciona/remove diretamente
+  card.addEventListener('click', () => toggleCard(cardInfo.num));
   
   return card;
 }
@@ -180,7 +268,9 @@ function createCardElement(cardNum, isCollected, collection) {
 function updateProgress() {
   const collection = collections[currentCollection];
   const collected = collectedCards[currentCollection] || [];
-  const total = collection.totalCards;
+  const cards = window.cardData[currentCollection] || [];
+  
+  const total = cards.length;
   const count = collected.length;
   const percentage = total > 0 ? Math.round((count / total) * 100) : 0;
   
@@ -190,47 +280,25 @@ function updateProgress() {
   document.getElementById('progress-percentage').textContent = `${percentage}% completo`;
 }
 
-function openModal(cardNum, isCollected, collection) {
-  const modal = document.getElementById('card-modal');
-  
-  const displayNum = String(cardNum).padStart(3, '0');
-  const imageUrl = collection.imageUrlPattern(cardNum);
-  
-  document.getElementById('modal-image').src = imageUrl;
-  document.getElementById('modal-name').textContent = `Carta #${displayNum}`;
-  document.getElementById('modal-number').textContent = `${collection.name} - ${collection.code}`;
-  
-  const toggleBtn = document.getElementById('modal-toggle');
-  toggleBtn.className = `modal-toggle ${isCollected ? 'collected' : 'not-collected'}`;
-  toggleBtn.textContent = isCollected ? 'Remover da Coleção' : 'Adicionar à Coleção';
-  
-  toggleBtn.onclick = () => toggleCard(cardNum);
-  
-  modal.classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeModal() {
-  const modal = document.getElementById('card-modal');
-  modal.classList.remove('active');
-  document.body.style.overflow = '';
-}
-
 function toggleCard(cardNum) {
   const collected = collectedCards[currentCollection] || [];
   const index = collected.indexOf(cardNum);
   
   if (index > -1) {
+    // Remover da coleção
     collected.splice(index, 1);
   } else {
+    // Adicionar à coleção
     collected.push(cardNum);
   }
   
   collectedCards[currentCollection] = collected;
   saveCollectedCards();
   
-  closeModal();
-  renderCollection();
+  // Re-renderizar apenas as cartas
+  renderCards();
+  updateProgress();
 }
 
+// Inicializar quando o DOM estiver pronto
 document.addEventListener('DOMContentLoaded', initializeApp);

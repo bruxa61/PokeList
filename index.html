@@ -10,8 +10,13 @@
 <body>
   <div class="header">
     <div class="container">
-      <h1 class="main-title">Checklist de Cartas Pokémon TCG</h1>
-      <p class="subtitle">Organize sua coleção e acompanhe seu progresso</p>
+      <div class="header-content">
+        <img id="collection-logo" class="collection-logo" src="" alt="Logo da Coleção">
+        <div class="header-text">
+          <h1 class="main-title">Checklist de Cartas Pokémon TCG</h1>
+          <p class="subtitle">Organize sua coleção e acompanhe seu progresso</p>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -30,7 +35,7 @@
     <div class="progress-section">
       <div class="progress-card">
         <div class="progress-header">
-          <h2 id="collection-title">Amigos de Jornada</h2>
+          <h2 id="collection-title">Rivais Predestinados</h2>
           <button class="reset-btn" id="reset-collection">Limpar Tudo</button>
         </div>
         <div class="progress-stats">
@@ -51,28 +56,47 @@
       </div>
     </div>
 
+    <!-- Barra de Pesquisa -->
+    <div class="search-section">
+      <input 
+        type="text" 
+        id="search-input" 
+        class="search-input" 
+        placeholder="🔍 Buscar por nome do Pokémon..."
+      >
+    </div>
+
+    <!-- Filtros -->
     <div class="filters-section">
-      <button class="filter-btn active" data-filter="all">Ver Todas</button>
-      <button class="filter-btn" data-filter="collected">Coletadas</button>
-      <button class="filter-btn" data-filter="missing">Faltando</button>
+      <div class="filter-group">
+        <h3 class="filter-title">Filtro de Status:</h3>
+        <div class="filter-buttons">
+          <button class="filter-btn active" data-filter="all">Ver Todas</button>
+          <button class="filter-btn" data-filter="collected">Coletadas</button>
+          <button class="filter-btn" data-filter="missing">Faltando</button>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <h3 class="filter-title">Filtro de Tipo:</h3>
+        <div class="type-filters" id="type-filters">
+          <!-- Tipos serão adicionados dinamicamente pelo JavaScript -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Legenda de Raridades -->
+    <div class="rarity-legend">
+      <h3 class="legend-title">Legenda de Raridade:</h3>
+      <div class="legend-items" id="rarity-legend">
+        <!-- Legendas serão adicionadas dinamicamente pelo JavaScript -->
+      </div>
     </div>
 
     <div id="card-grid" class="card-grid"></div>
   </div>
 
-  <div class="modal" id="card-modal">
-    <div class="modal-backdrop" id="modal-backdrop"></div>
-    <div class="modal-content">
-      <button class="modal-close" id="modal-close">&times;</button>
-      <img id="modal-image" src="" alt="">
-      <div class="modal-info">
-        <h3 id="modal-name"></h3>
-        <p id="modal-number"></p>
-        <button class="modal-toggle" id="modal-toggle"></button>
-      </div>
-    </div>
-  </div>
-
+  <script src="js/cardData.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
