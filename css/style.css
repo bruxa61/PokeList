@@ -5,12 +5,12 @@
 }
 
 :root {
-  --journey-primary: #4A90E2;
+  --journey-primary: #167eac;
   --journey-secondary: #E3F2FD;
-  --journey-accent: #2196F3;
-  --rivals-primary: #E91E63;
+  --journey-accent: #95c5c8;
+  --rivals-primary: #c63939;
   --rivals-secondary: #FCE4EC;
-  --rivals-accent: #C2185B;
+  --rivals-accent: #551452;
   --text-dark: #212121;
   --text-light: #757575;
   --bg-light: #F5F5F5;
@@ -38,7 +38,7 @@ body {
 }
 
 .header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #167eac 0%, #95c5c8 100%);
   color: var(--white);
   padding: 40px 20px;
   margin-bottom: 30px;
@@ -157,7 +157,7 @@ body {
 }
 
 .reset-btn {
-  background: #EF5350;
+  background: #c90a06;
   color: var(--white);
   border: none;
   padding: 8px 16px;
@@ -169,7 +169,7 @@ body {
 }
 
 .reset-btn:hover {
-  background: #E53935;
+  background: #940200;
   transform: scale(1.05);
 }
 
@@ -305,8 +305,8 @@ body {
 }
 
 .filter-btn:hover {
-  border-color: var(--journey-primary);
-  color: var(--journey-primary);
+  border-color: #a7a7a7;
+  color: #363636;
 }
 
 .filter-btn.active {

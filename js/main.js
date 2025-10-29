@@ -4,7 +4,7 @@ const collections = {
     name: 'Amigos de Jornada',
     code: 'SV09',
     theme: 'journey',
-    logo: 'https://images.squarespace-cdn.com/content/v1/5cf4cfa4382ac0000123aa1b/1736441507950-EBYE929POGW302CQP8PA/Pokemon_TCG_Scarlet_Violet%E2%80%94Journey_Together_Logo+%281%29.png',
+    logo: 'https://tcg.pokemon.com/assets/img/sv-expansions/journey-together/logo/pt-br/sv9-logo.png',
     totalCards: 190,
     imageUrlPattern: (num) => `https://images.pokemontcg.io/sv9/${num}.png`
   },
@@ -12,7 +12,7 @@ const collections = {
     name: 'Rivais Predestinados',
     code: 'SV10',
     theme: 'rivals',
-    logo: 'https://images.squarespace-cdn.com/content/v1/5cf4cfa4382ac0000123aa1b/1742827441679-4VIFZPI6H1DUBO1D76WV/Pokemon_TCG_Scarlet_Violet%E2%80%94Destined_Rivals_Logo.png',
+    logo: 'https://tcg.pokemon.com/assets/img/sv-expansions/destined-rivals/logo/pt-br/sv10-logo.png',
     totalCards: 244,
     imageUrlPattern: (num) => `https://images.pokemontcg.io/sv10/${num}.png`
   }
