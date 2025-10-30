@@ -2,24 +2,24 @@
 // Baseado nos PDFs oficiais da Pokémon TCG
 
 window.pokemonTypes = {
-  grass: { name: 'Grama', color: '#78C850', svg: '<circle cx="12" cy="12" r="10" fill="#78C850"/><path d="M12 6 L12 18 M8 10 Q12 8 16 10" stroke="white" stroke-width="2" fill="none"/>' },
-  fire: { name: 'Fogo', color: '#F08030', svg: '<circle cx="12" cy="12" r="10" fill="#F08030"/><path d="M12 6 C14 8, 15 10, 13 14 C15 12, 16 13, 15 16 C14 18, 10 18, 9 16 C8 13, 9 12, 11 14 C9 10, 10 8, 12 6 Z" fill="white"/>' },
-  water: { name: 'Água', color: '#6890F0', svg: '<circle cx="12" cy="12" r="10" fill="#6890F0"/><path d="M12 6 C15 8, 16 11, 16 14 C16 17, 14 18, 12 18 C10 18, 8 17, 8 14 C8 11, 9 8, 12 6 Z" fill="white"/>' },
-  electric: { name: 'Elétrico', color: '#F8D030', svg: '<circle cx="12" cy="12" r="10" fill="#F8D030"/><path d="M13 5 L8 12 L11 12 L10 19 L16 11 L13 11 Z" fill="white"/>' },
-  psychic: { name: 'Psíquico', color: '#F85888', svg: '<circle cx="12" cy="12" r="10" fill="#F85888"/><circle cx="12" cy="10" r="3" fill="white"/><circle cx="9" cy="15" r="1.5" fill="white"/><circle cx="15" cy="15" r="1.5" fill="white"/>' },
-  fighting: { name: 'Lutador', color: '#C03028', svg: '<circle cx="12" cy="12" r="10" fill="#C03028"/><path d="M8 10 L10 8 L14 12 L16 10 L14 14 L10 12 Z" fill="white" stroke="white" stroke-width="1.5"/>' },
-  dark: { name: 'Sombrio', color: '#705848', svg: '<circle cx="12" cy="12" r="10" fill="#705848"/><path d="M10 7 C6 10, 6 14, 10 17 C8 14, 8 10, 10 7 Z M14 7 C18 10, 18 14, 14 17 C16 14, 16 10, 14 7 Z" fill="white"/>' },
-  steel: { name: 'Aço', color: '#B8B8D0', svg: '<circle cx="12" cy="12" r="10" fill="#B8B8D0"/><circle cx="12" cy="12" r="6" fill="none" stroke="white" stroke-width="2"/><circle cx="12" cy="8" r="1" fill="white"/><circle cx="12" cy="16" r="1" fill="white"/>' },
-  fairy: { name: 'Fada', color: '#EE99AC', svg: '<circle cx="12" cy="12" r="10" fill="#EE99AC"/><path d="M12 7 L13 11 L17 11 L14 13.5 L15 17 L12 14.5 L9 17 L10 13.5 L7 11 L11 11 Z" fill="white"/>' },
-  dragon: { name: 'Dragão', color: '#7038F8', svg: '<circle cx="12" cy="12" r="10" fill="#7038F8"/><path d="M8 10 Q12 6 16 10 Q18 12 16 15 Q12 18 8 15 Q6 12 8 10 Z M10 11 L10 13 M14 11 L14 13" stroke="white" stroke-width="2" fill="none"/>' },
-  normal: { name: 'Normal', color: '#A8A878', svg: '<circle cx="12" cy="12" r="10" fill="#A8A878"/><circle cx="12" cy="12" r="5" fill="white"/>' },
-  ice: { name: 'Gelo', color: '#98D8D8', svg: '<circle cx="12" cy="12" r="10" fill="#98D8D8"/><path d="M12 6 L12 18 M7 9 L17 15 M7 15 L17 9" stroke="white" stroke-width="2"/><circle cx="12" cy="12" r="2" fill="white"/>' },
-  poison: { name: 'Venenoso', color: '#A040A0', svg: '<circle cx="12" cy="12" r="10" fill="#A040A0"/><path d="M12 7 C9 7, 7 9, 7 11 C7 13, 8 14, 10 15 C11 16, 13 16, 14 15 C16 14, 17 13, 17 11 C17 9, 15 7, 12 7 Z M10 10 L10 11 M14 10 L14 11" stroke="white" stroke-width="1.5" fill="none"/>' },
-  ground: { name: 'Terra', color: '#E0C068', svg: '<circle cx="12" cy="12" r="10" fill="#E0C068"/><path d="M6 14 L9 11 L12 13 L15 10 L18 12 L18 18 L6 18 Z" fill="white"/>' },
-  flying: { name: 'Voador', color: '#A890F0', svg: '<circle cx="12" cy="12" r="10" fill="#A890F0"/><path d="M6 14 C8 10, 10 8, 12 8 C14 8, 16 10, 18 14 C16 12, 14 11, 12 11 C10 11, 8 12, 6 14 Z" fill="white"/>' },
-  bug: { name: 'Inseto', color: '#A8B820', svg: '<circle cx="12" cy="12" r="10" fill="#A8B820"/><circle cx="10" cy="10" r="2" fill="white"/><circle cx="14" cy="10" r="2" fill="white"/><path d="M7 12 L6 15 M17 12 L18 15 M12 14 L12 17" stroke="white" stroke-width="2"/>' },
-  rock: { name: 'Pedra', color: '#B8A038', svg: '<circle cx="12" cy="12" r="10" fill="#B8A038"/><path d="M12 7 L16 11 L14 16 L10 16 L8 11 Z" fill="white"/>' },
-  ghost: { name: 'Fantasma', color: '#705898', svg: '<circle cx="12" cy="12" r="10" fill="#705898"/><path d="M12 6 C15 6, 17 8, 17 11 L17 16 C17 16, 16 15, 15 16 C14 17, 13 15, 12 16 C11 15, 10 17, 9 16 C8 15, 7 16, 7 16 L7 11 C7 8, 9 6, 12 6 Z M10 10 L10 12 M14 10 L14 12" stroke="white" stroke-width="1.5" fill="white"/>' }
+  grass: { name: 'Grama', color: '#78C850', svg: '<circle cx="12" cy="12" r="10" fill="#78C850"/>'},
+  fire: { name: 'Fogo', color: '#F08030', svg: '<circle cx="12" cy="12" r="10" fill="#F08030"/>'},
+  water: { name: 'Água', color: '#6890F0', svg: '<circle cx="12" cy="12" r="10" fill="#6890F0"/>'},
+  electric: { name: 'Elétrico', color: '#F8D030', svg: '<circle cx="12" cy="12" r="10" fill="#F8D030"/>'},
+  psychic: { name: 'Psíquico', color: '#F85888', svg: '<circle cx="12" cy="12" r="10" fill="#F85888"/>'},
+  fighting: { name: 'Lutador', color: '#C03028', svg: '<circle cx="12" cy="12" r="10" fill="#C03028"/>'},
+  dark: { name: 'Sombrio', color: '#705848', svg: '<circle cx="12" cy="12" r="10" fill="#705848"/>'},
+  steel: { name: 'Aço', color: '#B8B8D0', svg: '<circle cx="12" cy="12" r="10" fill="#B8B8D0"/>'},
+  fairy: { name: 'Fada', color: '#EE99AC', svg: '<circle cx="12" cy="12" r="10" fill="#EE99AC"/>'},
+  dragon: { name: 'Dragão', color: '#7038F8', svg: '<circle cx="12" cy="12" r="10" fill="#7038F8"/>'},
+  normal: { name: 'Normal', color: '#A8A878', svg: '<circle cx="12" cy="12" r="10" fill="#A8A878"/>'},
+  ice: { name: 'Gelo', color: '#98D8D8', svg: '<circle cx="12" cy="12" r="10" fill="#98D8D8"/>'},
+  poison: { name: 'Venenoso', color: '#A040A0', svg: '<circle cx="12" cy="12" r="10" fill="#A040A0"/>'},
+  ground: { name: 'Terra', color: '#E0C068', svg: '<circle cx="12" cy="12" r="10" fill="#E0C068"/>'},
+  flying: { name: 'Voador', color: '#A890F0', svg: '<circle cx="12" cy="12" r="10" fill="#A890F0"/>'},
+  bug: { name: 'Inseto', color: '#A8B820', svg: '<circle cx="12" cy="12" r="10" fill="#A8B820"/>'},
+  rock: { name: 'Pedra', color: '#B8A038', svg: '<circle cx="12" cy="12" r="10" fill="#B8A038"/>'},
+  ghost: { name: 'Fantasma', color: '#705898', svg: '<circle cx="12" cy="12" r="10" fill="#705898"/>'}
 };
 
 window.rarityTypes = {

@@ -344,14 +344,14 @@ body {
 }
 
 .type-filter-btn:hover {
-  border-color: var(--type-color, var(--journey-primary));
+  border-color: var(--type-color, #202a5f);
   transform: translateY(-2px);
   box-shadow: var(--shadow-sm);
 }
 
 .type-filter-btn.active {
-  background: var(--type-color, var(--journey-primary));
-  border-color: var(--type-color, var(--journey-primary));
+  background: var(--type-color, #202a5f);
+  border-color: var(--type-color, #202a5f);
   color: var(--white);
   box-shadow: var(--shadow-md);
 }
@@ -404,8 +404,8 @@ body {
 }
 
 .rarity-filter-btn.active {
-  background: var(--rarity-bg, var(--journey-primary));
-  border-color: var(--rarity-bg, var(--journey-primary));
+  background: var(--rarity-bg, #202a5f);
+  border-color: var(--rarity-bg, #202a5f);
   color: var(--rarity-color, var(--white));
   box-shadow: var(--shadow-md);
 }
