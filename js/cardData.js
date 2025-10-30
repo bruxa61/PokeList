@@ -23,14 +23,14 @@ window.pokemonTypes = {
 };
 
 window.rarityTypes = {
-  common: { name: 'Comum', symbol: '●', color: '#4a4a4a', bgColor: '#e0e0e0' },
-  uncommon: { name: 'Incomum', symbol: '◆', color: '#ffffff', bgColor: '#4a90e2' },
-  rare: { name: 'Rara', symbol: '★', color: '#ffffff', bgColor: '#f39c12' },
-  doubleRare: { name: 'Rara Dupla', symbol: '★★', color: '#ffffff', bgColor: '#e74c3c' },
-  ultraRare: { name: 'Ultra Rara', symbol: '★★', color: '#ffffff', bgColor: '#ffa600' },
-  illustrationRare: { name: 'Ilustração Rara', symbol: '★', color: '#ffffff', bgColor: '#8e17f0' },
-  specialIllustration: { name: 'Ilustração Rara Especial', symbol: '★★', color: '#ffffff', bgColor: '#9b59b6' },
-  hyperRare: { name: 'Hiper Rara', symbol: '★★★', color: '#ffffff', bgColor: '#f1c40f' }
+  common: { name: 'Comum', symbol: '●', color: '#000', bgColor: '#e0e0e0' },
+  uncommon: { name: 'Incomum', symbol: '◆', color: '#000', bgColor: '#e0e0e0' },
+  rare: { name: 'Rara', symbol: '★', color: '#000', bgColor: '#e0e0e0' },
+  doubleRare: { name: 'Rara Dupla', symbol: '★★', color: '#000', bgColor: '#e0e0e0' },
+  ultraRare: { name: 'Ultra Rara', symbol: '★★', color: '#ffffffff', bgColor: '#ffc916ff' },
+  illustrationRare: { name: 'Ilustração Rara', symbol: '★', color: '#ffffff', bgColor: '#9100e6ff' },
+  specialIllustration: { name: 'Ilustração Rara Especial', symbol: '★★', color: '#ffffff', bgColor: '#9100e6ff' },
+  hyperRare: { name: 'Hiper Rara', symbol: '★★★', color: '#ffffff', bgColor: '#ffc916ff' }
 };
 
 window.cardData = {
