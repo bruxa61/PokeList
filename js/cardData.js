@@ -13,11 +13,11 @@ window.pokemonTypes = {
   dragon: { name: 'Dragão', color: '#a7a266ff', svg: '<circle cx="12" cy="12" r="10" fill="#dae5a6ff"/>'},
   normal: { name: 'Normal', color: '#858585ff', svg: '<circle cx="12" cy="12" r="10" fill="#cececeff"/>'},
 
-  apoiador: { name: 'Apoiador', color: '#858585ff', svg: '<circle cx="12" cy="12" r="10" fill="#cececeff"/>'},
-  item: { name: 'Item', color: '#858585ff', svg: '<circle cx="12" cy="12" r="10" fill="#cececeff"/>'},
-  ferramenta: { name: 'Ferramenta', color: '#858585ff', svg: '<circle cx="12" cy="12" r="10" fill="#cececeff"/>'},
-  estadio: { name: 'Estádio', color: '#858585ff', svg: '<circle cx="12" cy="12" r="10" fill="#cececeff"/>'},
-  energia: { name: 'Energia Especial', color: '#858585ff', svg: '<circle cx="12" cy="12" r="10" fill="#cececeff"/>'}
+  apoiador: { name: 'Apoiador', color: '#db590dff', svg: '<circle cx="12" cy="12" r="10" fill="#f79c68ff"/>'},
+  item: { name: 'Item', color: '#037de0ff', svg: '<circle cx="12" cy="12" r="10" fill="#acd2ebff"/>'},
+  ferramenta: { name: 'Ferramenta', color: '#702accff', svg: '<circle cx="12" cy="12" r="10" fill="#d6c3f8ff"/>'},
+  estadio: { name: 'Estádio', color: '#32c04aff', svg: '<circle cx="12" cy="12" r="10" fill="#b6f0a8ff"/>'},
+  energia: { name: 'Energia Especial', color: '#7b6f88ff', svg: '<circle cx="12" cy="12" r="10" fill="#d4cedfff"/>'}
 };
 
 window.rarityTypes = {
