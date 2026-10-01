@@ -625,3 +625,28 @@ body {
     font-size: 1rem;
   }
 }
+
+/* PokeList + TCGdex: estados da integração e componentes novos */
+.eyebrow { margin: 0 0 6px; font-size: .72rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; opacity: .78; }
+.collection-description { margin-top: 4px; color: var(--text-light); }
+.progress-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+.secondary-btn { border: 1px solid #ccd4df; background: #fff; color: #344054; padding: 8px 13px; border-radius: 8px; cursor: pointer; }
+.secondary-btn:hover { border-color: var(--journey-primary); }
+.api-status { min-height: 24px; margin: 0 auto 16px; text-align: center; color: #475467; font-size: .9rem; }
+.api-status[data-type="success"] { color: #147a45; } .api-status[data-type="warning"] { color: #9a6700; } .api-status[data-type="error"] { color: #b42318; }
+.controls { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
+.search-label { font-weight: 700; }
+.controls .search-input { flex: 1; min-width: 220px; max-width: none; margin: 0; }
+.controls .filter-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
+.controls .filter-btn { padding: 9px 13px; font-size: .88rem; }
+.catalog-note { margin-top: 15px; padding: 10px 12px; background: #fff8e1; color: #795548; border-radius: 8px; font-size: .9rem; }
+.loading-state { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 130px; color: var(--text-light); }
+.spinner { width: 22px; height: 22px; border: 3px solid #d9e1ea; border-top-color: var(--journey-primary); border-radius: 50%; animation: spin .8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.card-placeholder { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; color: #667085; font-size: .9rem; background: linear-gradient(145deg, #f3f5f7, #dfe5eb); }
+.card-rarity { display: block; margin-top: 4px; color: var(--text-light); text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.footer { padding: 12px 20px 30px; text-align: center; color: var(--text-light); font-size: .85rem; }
+.footer a { color: var(--journey-primary); font-weight: 700; }
+.anniversary-btn.active { border-color: #c08b2c; background: linear-gradient(135deg, #c08b2c, #6d4c1c); color: #fff; }
+.card-item:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid #f3b41b; outline-offset: 2px; }
+@media (max-width: 700px) { .progress-actions { width: 100%; justify-content: flex-start; } .controls { align-items: stretch; flex-direction: column; } .controls .search-input { width: 100%; } .controls .filter-buttons { justify-content: center; } }

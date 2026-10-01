@@ -1,103 +1,56 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Checklist Pokémon TCG</title>
-  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Checklist pessoal de cartas Pokémon TCG alimentada pela API TCGdex.">
+  <title>PokeList · Checklist Pokémon TCG</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Flexo:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
-<body>
-  <div class="header">
-    <div class="container">
-      <div class="header-content">
-        <img id="collection-logo" class="collection-logo" src="" alt="Logo da Coleção">
-        <div class="header-text">
-          <h1 class="main-title">Checklist de Cartas Pokémon TCG</h1>
-          <p class="subtitle">Organize sua coleção e acompanhe seu progresso</p>
-        </div>
+<body data-theme="journey">
+  <header class="header">
+    <div class="container header-content">
+      <img id="collection-logo" class="collection-logo" alt="Logo da coleção" hidden>
+      <div class="header-text">
+        <p class="eyebrow">POKÉMON TCG · TCGDEX</p>
+        <h1 class="main-title">Minha PokeList</h1>
+        <p class="subtitle">Marque as cartas que já fazem parte da sua coleção.</p>
       </div>
     </div>
-  </div>
+  </header>
 
-  <div class="container">
-    <div class="collection-selector">
-      <button class="collection-btn" data-collection="journey">
-        <span class="collection-name">Amigos de Jornada</span>
-        <span class="collection-code">SV09</span>
-      </button>
-      <button class="collection-btn active" data-collection="rivals">
-        <span class="collection-name">Rivais Predestinados</span>
-        <span class="collection-code">SV10</span>
-      </button>
-    </div>
+  <main class="container">
+    <section class="collection-selector" aria-label="Selecionar coleção">
+      <button class="collection-btn active" data-collection="journey"><span class="collection-name">Amigos de Jornada</span><span class="collection-code">SV09</span></button>
+      <button class="collection-btn" data-collection="rivals"><span class="collection-name">Rivais Predestinados</span><span class="collection-code">SV10</span></button>
+      <button class="collection-btn anniversary-btn" data-collection="anniversary"><span class="collection-name">30th Celebration</span><span class="collection-code">30TH · EN</span></button>
+    </section>
 
-    <div class="progress-section">
+    <section class="progress-section">
       <div class="progress-card">
         <div class="progress-header">
-          <h2 id="collection-title">Rivais Predestinados</h2>
-          <button class="reset-btn" id="reset-collection">Limpar Tudo</button>
+          <div><p class="eyebrow">Coleção selecionada <span id="collection-code" class="collection-code">SV09</span></p><h2 id="collection-title">Amigos de Jornada</h2><p id="collection-description" class="collection-description"></p></div>
+          <div class="progress-actions"><button class="secondary-btn" id="refresh-data">Atualizar dados</button><button class="reset-btn" id="reset-collection">Limpar coleção</button></div>
         </div>
-        <div class="progress-stats">
-          <div class="stat-item">
-            <span class="stat-value" id="collected-count">0</span>
-            <span class="stat-label">Coletadas</span>
-          </div>
-          <div class="stat-divider">/</div>
-          <div class="stat-item">
-            <span class="stat-value" id="total-count">0</span>
-            <span class="stat-label">Total</span>
-          </div>
-        </div>
-        <div class="progress-bar-container">
-          <div class="progress-bar" id="progress-bar"></div>
-        </div>
-        <p class="progress-percentage" id="progress-percentage">0%</p>
+        <div class="progress-stats"><div class="stat-item"><span class="stat-value" id="collected-count">0</span><span class="stat-label">Coletadas</span></div><div class="stat-divider">/</div><div class="stat-item"><span class="stat-value" id="total-count">0</span><span class="stat-label">Disponíveis</span></div></div>
+        <div class="progress-bar-container"><div class="progress-bar" id="progress-bar"></div></div><p class="progress-percentage" id="progress-percentage">0% completo</p>
+        <p class="catalog-note" id="incomplete-notice" hidden>A API informa <strong id="official-total">0</strong> cartas oficiais, mas entregou <strong id="available-total">0</strong> detalhes agora. A checklist mostra somente o que a TCGdex disponibilizou.</p>
       </div>
-    </div>
+    </section>
 
-    <!-- Barra de Pesquisa -->
-    <div class="search-section">
-      <input 
-        type="text" 
-        id="search-input" 
-        class="search-input" 
-        placeholder="🔍 Buscar por nome do Pokémon..."
-      >
-    </div>
-
-    <!-- Filtros -->
-    <div class="filters-section">
-      <div class="filter-group">
-        <h3 class="filter-title">Filtro de Status:</h3>
-        <div class="filter-buttons">
-          <button class="filter-btn active" data-filter="all">Ver Todas</button>
-          <button class="filter-btn" data-filter="collected">Coletadas</button>
-          <button class="filter-btn" data-filter="missing">Faltando</button>
-        </div>
-      </div>
-
-      <div class="filter-group">
-        <h3 class="filter-title">Filtro de Tipo:</h3>
-        <div class="type-filters" id="type-filters">
-          <!-- Tipos serão adicionados dinamicamente pelo JavaScript -->
-        </div>
-      </div>
-    </div>
-
-    <!-- Filtro de Raridades -->
-    <div class="filter-group rarity-filter-group">
-      <h3 class="filter-title">Filtro de Raridade:</h3>
-      <div class="rarity-filters" id="rarity-filters">
-        <!-- Filtros de raridade serão adicionados dinamicamente pelo JavaScript -->
-      </div>
-    </div>
-
-    <div id="card-grid" class="card-grid"></div>
-  </div>
-
-  <script src="js/cardData.js"></script>
-  <script src="js/main.js"></script>
+    <p id="api-status" class="api-status" role="status">Preparando a TCGdex…</p>
+    <section class="controls" aria-label="Buscar e filtrar cartas">
+      <label class="search-label" for="search-input">Buscar carta</label><input type="search" id="search-input" class="search-input" placeholder="Nome ou número da carta…">
+      <label class="filter-label" for="type-filter">Tipo</label><select id="type-filter" class="select-filter"><option value="all">Todos os tipos</option></select>
+      <label class="filter-label" for="rarity-filter">Raridade</label><select id="rarity-filter" class="select-filter"><option value="all">Todas as raridades</option></select>
+      <div id="filter-buttons" class="filter-buttons"></div>
+    </section>
+    <div id="loading-state" class="loading-state" hidden><span class="spinner"></span> Carregando coleção…</div>
+    <section id="card-grid" class="card-grid" aria-live="polite"></section>
+  </main>
+  <footer class="footer container">Dados públicos da <a href="https://tcgdex.dev/" target="_blank" rel="noreferrer">TCGdex</a>. O progresso fica salvo somente neste navegador.</footer>
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>
