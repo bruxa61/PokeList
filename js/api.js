@@ -6,19 +6,19 @@ const DETAIL_CONCURRENCY = 10;
 
 export const COLLECTIONS = {
   journey: {
-    id: 'sv09', language: 'pt', name: 'Amigos de Jornada', code: 'SV09', theme: 'journey',
+    id: 'sv09', language: 'pt', name: 'Amigos de Jornada', code: 'JTG', theme: 'journey',
     logoUrl: 'https://d1i787aglh9bmb.cloudfront.net/assets/img/sv-expansions/sv09/logo/pt-br/sv9-logo.png',
     description: 'A expansão Scarlet & Violet — Amigos de Jornada.',
   },
   rivals: {
-    id: 'sv10', language: 'pt', name: 'Rivais Predestinados', code: 'SV10', theme: 'rivals',
+    id: 'sv10', language: 'pt', name: 'Rivais Predestinados', code: 'DRI', theme: 'rivals',
     logoUrl: 'https://d1i787aglh9bmb.cloudfront.net/assets/img/sv-expansions/sv10/logo/pt-br/sv10-logo.png',
     description: 'A expansão Scarlet & Violet — Rivais Predestinados.',
   },
   anniversary: {
-    id: '30th', language: 'en', name: '30th Celebration', code: '30TH · EN', theme: 'anniversary',
+    id: '30th', language: 'en', name: 'Coleção 30 anos', code: '30C', theme: 'anniversary',
     logoUrl: 'https://d1i787aglh9bmb.cloudfront.net/assets/img/global/logos/pt-br/thirty.png',
-    description: 'The Pokémon TCG 30th anniversary celebration set. Data loaded in English because the Portuguese catalog is incomplete.',
+    description: 'O conjunto comemorativo do 30º aniversário do Pokémon TCG.',
   },
 };
 
