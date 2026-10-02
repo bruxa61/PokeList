@@ -1,8 +1,14 @@
 # PokeList
 
-Uma checklist pessoal para acompanhar sua coleção de cartas **Pokémon TCG**.
+Uma checklist pessoal para acompanhar sua coleção de **cartas Pokémon TCG**.
 
 O projeto permite visualizar cartas de diferentes coleções, pesquisar por nome ou número, filtrar por tipo e raridade e marcar as cartas que já fazem parte da sua coleção.
+
+## Acesse o projeto
+
+Veja a PokeList funcionando no GitHub Pages:
+
+**[Acessar a PokeList](https://bruxa61.github.io/PokeList/)**
 
 > **Projeto em evolução:** novas coleções serão adicionadas futuramente para ampliar a checklist e permitir o acompanhamento de uma coleção cada vez maior.
 
@@ -37,13 +43,11 @@ cd PokeList
 Inicie o servidor local:
 
 ```bash
-python3 server.py
+py -m http.server 8000
 ```
 
 Depois, acesse no navegador:
 
 ```text
-http://localhost:5000
+http://localhost:8000
 ```
-
-O arquivo `server.py` utiliza o servidor HTTP nativo do Python e serve os arquivos estáticos do projeto.
