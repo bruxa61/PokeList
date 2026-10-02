@@ -53,6 +53,54 @@ function valuesFromCards(cards, key) {
     .filter((value) => value && value !== '—'))].sort((a, b) => a.localeCompare(b));
 }
 
+const TYPE_SYMBOLS = {
+  planta: ['Planta', '#4f9d45', '<path d="M20 4C10 4 4 9 4 18c0 1.2.2 2.3.6 3.4C14 21 20 15 20 4Z"/><path d="M5 20c4-4 7-7 12-10"/>'],
+  grass: ['Grass', '#4f9d45', '<path d="M20 4C10 4 4 9 4 18c0 1.2.2 2.3.6 3.4C14 21 20 15 20 4Z"/><path d="M5 20c4-4 7-7 12-10"/>'],
+  fogo: ['Fogo', '#ed6c32', '<path d="M12 3c1 5-3 6-3 10a3 3 0 0 0 6 0c0-2-1-3-1-5 4 3 6 6 6 9a8 8 0 1 1-16 0c0-4 3-7 8-10Z"/>'],
+  fire: ['Fire', '#ed6c32', '<path d="M12 3c1 5-3 6-3 10a3 3 0 0 0 6 0c0-2-1-3-1-5 4 3 6 6 6 9a8 8 0 1 1-16 0c0-4 3-7 8-10Z"/>'],
+  água: ['Água', '#3d83d5', '<path d="M12 2S5 10 5 15a7 7 0 0 0 14 0c0-5-7-13-7-13Z"/>'],
+  water: ['Water', '#3d83d5', '<path d="M12 2S5 10 5 15a7 7 0 0 0 14 0c0-5-7-13-7-13Z"/>'],
+  elétrico: ['Elétrico', '#e6ad18', '<path d="M14 2 5 13h6l-1 9 9-12h-6l1-8Z"/>'],
+  lightning: ['Lightning', '#e6ad18', '<path d="M14 2 5 13h6l-1 9 9-12h-6l1-8Z"/>'],
+  lutador: ['Lutador', '#b65a35', '<path d="m7 5 5 3 5-3 3 3-3 5 2 4-3 3-4-3-4 3-3-3 2-4-3-5 3-3Z"/>'],
+  fighting: ['Fighting', '#b65a35', '<path d="m7 5 5 3 5-3 3 3-3 5 2 4-3 3-4-3-4 3-3-3 2-4-3-5 3-3Z"/>'],
+  psíquico: ['Psíquico', '#a64ba6', '<path d="M12 3a7 7 0 0 0-4 12v5h8v-5a7 7 0 0 0-4-12Z"/><path d="M9 18h6"/>'],
+  psychic: ['Psychic', '#a64ba6', '<path d="M12 3a7 7 0 0 0-4 12v5h8v-5a7 7 0 0 0-4-12Z"/><path d="M9 18h6"/>'],
+  sombrio: ['Sombrio', '#4b4658', '<path d="M12 3 3 12l9 9 9-9-9-9Z"/><path d="m12 7 2 5-2 5-2-5 2-5Z"/>'],
+  darkness: ['Darkness', '#4b4658', '<path d="M12 3 3 12l9 9 9-9-9-9Z"/><path d="m12 7 2 5-2 5-2-5 2-5Z"/>'],
+  aço: ['Aço', '#718096', '<path d="m12 2 8 4v7c0 5-3 8-8 9-5-1-8-4-8-9V6l8-4Z"/><path d="m8 12 3 3 5-6"/>'],
+  metal: ['Metal', '#718096', '<path d="m12 2 8 4v7c0 5-3 8-8 9-5-1-8-4-8-9V6l8-4Z"/><path d="m8 12 3 3 5-6"/>'],
+  dragão: ['Dragão', '#6575b8', '<path d="M20 5c-5 0-9 2-11 6-1 2-3 3-5 3 1 4 5 6 9 5 5-1 8-6 7-14Z"/><path d="M5 19c3-3 6-5 10-6"/>'],
+  dragon: ['Dragon', '#6575b8', '<path d="M20 5c-5 0-9 2-11 6-1 2-3 3-5 3 1 4 5 6 9 5 5-1 8-6 7-14Z"/><path d="M5 19c3-3 6-5 10-6"/>'],
+  incolor: ['Incolor', '#7b8794', '<path d="M12 3 21 12l-9 9-9-9 9-9Z"/><circle cx="12" cy="12" r="3"/>'],
+  colorless: ['Colorless', '#7b8794', '<path d="M12 3 21 12l-9 9-9-9 9-9Z"/><circle cx="12" cy="12" r="3"/>'],
+};
+
+const RARITY_SYMBOLS = [
+  { match: ['common', 'comum'], symbol: '●', className: 'rarity-common' },
+  { match: ['uncommon', 'incomum'], symbol: '◆', className: 'rarity-uncommon' },
+  { match: ['double rare', 'rara dupla'], symbol: '★★', className: 'rarity-double' },
+  { match: ['special illustration rare', 'ilustração rara especial'], symbol: '★★', className: 'rarity-special' },
+  { match: ['illustration rare', 'ilustração rara'], symbol: '★', className: 'rarity-illustration' },
+  { match: ['hyper rare', 'hiper rara'], symbol: '★★★', className: 'rarity-hyper' },
+  { match: ['ultra rare', 'ultra rara'], symbol: '★★', className: 'rarity-ultra' },
+  { match: ['rare', 'rara'], symbol: '★', className: 'rarity-rare' },
+];
+
+function typeIcons(types = [], category = '') {
+  const labels = types.length ? types : [category];
+  return labels.map((type) => {
+    const icon = TYPE_SYMBOLS[String(type).toLocaleLowerCase('pt-BR')] || ['Carta', '#7b8794', '<circle cx="12" cy="12" r="7"/>'];
+    return `<span class="energy-symbol" style="--energy-color:${icon[1]}" title="${escapeHtml(icon[0])}" aria-label="${escapeHtml(icon[0])}"><svg viewBox="0 0 24 24" aria-hidden="true">${icon[2]}</svg></span>`;
+  }).join('');
+}
+
+function raritySymbol(rarity = '') {
+  const found = RARITY_SYMBOLS.find((item) => item.match.some((name) => rarity.toLocaleLowerCase('pt-BR').includes(name)));
+  const symbol = found || { symbol: '—', className: 'rarity-unknown' };
+  return `<span class="rarity-symbol-card ${symbol.className}" title="${escapeHtml(rarity || 'Raridade não informada')}" aria-label="${escapeHtml(rarity || 'Raridade não informada')}">${symbol.symbol}</span>`;
+}
+
 function typeLabel(card) {
   if (card.category) return card.category;
   if (card.types?.length) return card.types.join(' · ');
@@ -62,14 +110,18 @@ function typeLabel(card) {
 function updateTheme() {
   const collection = COLLECTIONS[state.current];
   document.body.dataset.theme = collection.theme;
+  document.body.className = `theme-${collection.theme}`;
   $('.header').style.background = '';
   $('#collection-title').textContent = collection.name;
   $('#collection-description').textContent = collection.description;
   $('#collection-code').textContent = collection.code;
-  $('#collection-logo').src = currentSet()?.logo || '';
-  $('#collection-logo').hidden = !currentSet()?.logo;
+  document.querySelector('.progress-card').className = `progress-card ${collection.theme}-theme`;
   document.querySelectorAll('.collection-btn').forEach((button) => {
-    button.classList.toggle('active', button.dataset.collection === state.current);
+    const isActive = button.dataset.collection === state.current;
+    button.classList.toggle('active', isActive);
+    button.classList.toggle('journey-theme', isActive && collection.theme === 'journey');
+    button.classList.toggle('rivals-theme', isActive && collection.theme === 'rivals');
+    button.classList.toggle('anniversary-theme', isActive && collection.theme === 'anniversary');
   });
 }
 
@@ -152,8 +204,8 @@ function renderCards() {
       </div>
       <div class="card-info">
         <p class="card-name" title="${escapeHtml(card.name)}">${escapeHtml(card.name)}</p>
-        <div class="card-meta"><span>${escapeHtml(card.types?.length ? card.types.join(' · ') : typeLabel(card))}</span><span>#${escapeHtml(card.num)}</span></div>
-        <small class="card-rarity">${escapeHtml(card.rarity || 'Raridade não informada')}</small>
+        <div class="card-meta"><span class="card-types" aria-label="Tipos: ${escapeHtml(card.types?.join(', ') || typeLabel(card))}">${typeIcons(card.types, card.category)}</span><span class="card-number">#${escapeHtml(card.num)}</span></div>
+        <div class="card-rarity" aria-label="Raridade: ${escapeHtml(card.rarity || 'Raridade não informada')}">${raritySymbol(card.rarity)}</div>
       </div>`;
     const toggle = () => toggleOwned(card.id);
     item.addEventListener('click', toggle);

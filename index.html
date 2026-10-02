@@ -12,7 +12,6 @@
 <body data-theme="journey">
   <header class="header">
     <div class="container header-content">
-      <img id="collection-logo" class="collection-logo" alt="Logo da coleção" hidden>
       <div class="header-text">
         <p class="eyebrow">POKÉMON TCG · TCGDEX</p>
         <h1 class="main-title">Minha PokeList</h1>
@@ -23,9 +22,9 @@
 
   <main class="container">
     <section class="collection-selector" aria-label="Selecionar coleção">
-      <button class="collection-btn active" data-collection="journey"><span class="collection-name">Amigos de Jornada</span><span class="collection-code">SV09</span></button>
-      <button class="collection-btn" data-collection="rivals"><span class="collection-name">Rivais Predestinados</span><span class="collection-code">SV10</span></button>
-      <button class="collection-btn anniversary-btn" data-collection="anniversary"><span class="collection-name">30th Celebration</span><span class="collection-code">30TH · EN</span></button>
+      <button class="collection-btn active" data-collection="journey"><img class="collection-btn-logo" src="https://d1i787aglh9bmb.cloudfront.net/assets/img/sv-expansions/sv09/logo/pt-br/sv9-logo.png" onerror="this.onerror=null;this.src='https://assets.tcgdex.net/pt/sv/sv09/logo'" alt="Logo Amigos de Jornada"><span class="collection-name">Amigos de Jornada</span><span class="collection-code">SV09</span></button>
+      <button class="collection-btn" data-collection="rivals"><img class="collection-btn-logo" src="https://d1i787aglh9bmb.cloudfront.net/assets/img/sv-expansions/sv10/logo/pt-br/sv10-logo.png" onerror="this.onerror=null;this.src='https://assets.tcgdex.net/pt/sv/sv10/logo'" alt="Logo Rivais Predestinados"><span class="collection-name">Rivais Predestinados</span><span class="collection-code">SV10</span></button>
+      <button class="collection-btn anniversary-btn" data-collection="anniversary"><img class="collection-btn-logo" src="https://d1i787aglh9bmb.cloudfront.net/assets/img/global/logos/pt-br/thirty.png" alt="Logo Celebração de 30 Anos"><span class="collection-name">30th Celebration</span><span class="collection-code">30TH · EN</span></button>
     </section>
 
     <section class="progress-section">
@@ -42,9 +41,9 @@
 
     <p id="api-status" class="api-status" role="status">Preparando a TCGdex…</p>
     <section class="controls" aria-label="Buscar e filtrar cartas">
-      <label class="search-label" for="search-input">Buscar carta</label><input type="search" id="search-input" class="search-input" placeholder="Nome ou número da carta…">
-      <label class="filter-label" for="type-filter">Tipo</label><select id="type-filter" class="select-filter"><option value="all">Todos os tipos</option></select>
-      <label class="filter-label" for="rarity-filter">Raridade</label><select id="rarity-filter" class="select-filter"><option value="all">Todas as raridades</option></select>
+      <div class="search-control"><label class="search-label" for="search-input">Buscar carta</label><input type="search" id="search-input" class="search-input" placeholder="Nome ou número da carta…"></div>
+      <div class="filter-control"><label class="filter-label" for="type-filter">Tipo</label><select id="type-filter" class="select-filter"><option value="all">Todos os tipos</option></select></div>
+      <div class="filter-control"><label class="filter-label" for="rarity-filter">Raridade</label><select id="rarity-filter" class="select-filter"><option value="all">Todas as raridades</option></select></div>
       <div id="filter-buttons" class="filter-buttons"></div>
     </section>
     <div id="loading-state" class="loading-state" hidden><span class="spinner"></span> Carregando coleção…</div>
